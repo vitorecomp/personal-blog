@@ -64,11 +64,4 @@ if [ -d "$THEME_SRC" ]; then
   fi
 fi
 
-# Seed Ghost Owner account if GHOST_ADMIN_EMAIL and GHOST_ADMIN_PASSWORD are set
-if [ -n "${GHOST_ADMIN_EMAIL:-}" ] && [ -n "${GHOST_ADMIN_PASSWORD:-}" ] && [ -f /usr/local/bin/seed-ghost-admin.mjs ]; then
-  node /usr/local/bin/seed-ghost-admin.mjs --pre-boot || true
-  chown node:node /var/lib/ghost/current/core/server/data/schema/fixtures/fixtures.json 2>/dev/null || true
-  node /usr/local/bin/seed-ghost-admin.mjs --post-boot &
-fi
-
 exec /usr/local/bin/docker-entrypoint.sh "$@"

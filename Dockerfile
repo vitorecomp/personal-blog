@@ -11,10 +11,9 @@ COPY --chown=node:node themes/vitorx86-garage /var/lib/ghost/content.orig/themes
 # - 4 technology topic channels
 # - 0 initial articles/posts (removes Ghost's default "Coming soon" post)
 COPY scripts/configure-ghost-defaults.mjs /usr/local/bin/configure-ghost-defaults.mjs
-COPY scripts/seed-ghost-admin.mjs /usr/local/bin/seed-ghost-admin.mjs
 COPY scripts/docker-entrypoint-vitorx86.sh /usr/local/bin/docker-entrypoint-vitorx86.sh
 
-RUN chmod +x /usr/local/bin/configure-ghost-defaults.mjs /usr/local/bin/seed-ghost-admin.mjs /usr/local/bin/docker-entrypoint-vitorx86.sh && \
+RUN chmod +x /usr/local/bin/configure-ghost-defaults.mjs /usr/local/bin/docker-entrypoint-vitorx86.sh && \
     node /usr/local/bin/configure-ghost-defaults.mjs && \
     chown node:node \
       /var/lib/ghost/current/core/server/data/schema/default-settings/default-settings.json \
