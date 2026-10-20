@@ -1,0 +1,162 @@
+{{!< default}}
+
+{{#post}}
+<article class="{{post_class}} article-shell">
+  <div class="reading-progress-bar" id="reading-progress-bar" aria-hidden="true"></div>
+
+  <div class="container">
+    <header class="article-terminal-header">
+      <div class="terminal-card-bar">
+        <div class="terminal-dots" aria-hidden="true">
+          <span class="dot-red"></span>
+          <span class="dot-yellow"></span>
+          <span class="dot-green"></span>
+        </div>
+        <span class="terminal-card-path">
+          ~/blog/{{#if primary_tag}}{{primary_tag.slug}}/{{/if}}{{slug}}.md
+        </span>
+        <span class="terminal-card-meta">
+          <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="YYYY-MM-DD"}}</time>
+          {{#if reading_time}} &middot; {{reading_time}}{{/if}}
+        </span>
+      </div>
+
+      <div class="article-header-body">
+        <p class="eyebrow-lockup eyebrow-on-dark">
+          <span class="eyebrow-prefix-dark">~$&nbsp;</span>cat ./{{#if primary_tag}}{{primary_tag.slug}}/{{/if}}{{slug}}.md
+        </p>
+
+        <h1 class="article-title">{{title}}</h1>
+
+        {{#if custom_excerpt}}
+          <p class="article-excerpt">{{custom_excerpt}}</p>
+        {{/if}}
+
+        <div class="article-meta-bar">
+          <div class="terminal-card-tags">
+            {{#foreach tags}}
+              <a
+                href="{{url}}"
+                class="tag-chip {{#match slug "ai-and-agents"}}tag-indigo{{else match slug "hardware-and-garage"}}tag-pink{{else}}tag-teal{{/match}}"
+              >
+                #{{slug}}
+              </a>
+            {{/foreach}}
+          </div>
+
+          <div class="article-author-line">
+            {{#primary_author}}
+              <span>by <a href="{{url}}" class="author-inline-link">{{name}}</a></span>
+            {{/primary_author}}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    {{#if feature_image}}
+      <figure class="article-feature-figure">
+        <img
+          srcset="{{img_url feature_image size="s"}} 300w,
+                  {{img_url feature_image size="m"}} 600w,
+                  {{img_url feature_image size="l"}} 1000w,
+                  {{img_url feature_image size="xl"}} 1600w"
+          sizes="(max-width: 1120px) 100vw, 1120px"
+          src="{{img_url feature_image size="xl"}}"
+          alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+          class="article-feature-image"
+        />
+        {{#if feature_image_caption}}
+          <figcaption class="article-feature-caption">{{feature_image_caption}}</figcaption>
+        {{/if}}
+      </figure>
+    {{/if}}
+
+    <div class="article-layout-grid">
+      <div class="gh-content gh-canvas" id="article-prose-content">
+        {{content}}
+      </div>
+
+      <aside class="article-sidebar" id="article-toc-aside" aria-label="Table of Contents" hidden>
+        <div class="terminal-card toc-card">
+          <div class="terminal-card-bar">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="terminal-card-path">~$ cat ./toc.txt</span>
+          </div>
+          <nav class="toc-body" id="article-toc-nav" aria-label="Article sections"></nav>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="article-footer">
+      <div class="terminal-card article-share-card">
+        <div class="terminal-card-bar">
+          <div class="terminal-dots" aria-hidden="true">
+            <span class="dot-red"></span>
+            <span class="dot-yellow"></span>
+            <span class="dot-green"></span>
+          </div>
+          <span class="terminal-card-path">~/blog/eof.sh</span>
+        </div>
+        <div class="article-share-body">
+          <div>
+            <p class="eyebrow-lockup eyebrow-on-dark">
+              <span class="eyebrow-prefix-dark">~$&nbsp;</span>echo "EOF: {{slug}}.md"
+            </p>
+            <p class="share-copy">
+              Enjoyed this dispatch? Share the link or subscribe to the RSS feed.
+            </p>
+          </div>
+          <div class="cta-row">
+            <button
+              type="button"
+              class="btn-terminal"
+              id="copy-article-url-btn"
+              data-url="{{url absolute="true"}}"
+            >
+              <span class="dollar-muted">$</span>
+              <span id="copy-article-url-text">./copy_url.sh</span>
+            </button>
+            <a href="{{@site.url}}" class="btn-terminal-secondary" id="back-to-blog-btn">
+              <span class="dollar-muted">$</span>
+              <span>cd ~/blog</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {{#if comments}}
+        <section class="article-comments-section" aria-label="Comments">
+          {{comments}}
+        </section>
+      {{/if}}
+
+      <nav class="post-adjacent-nav" aria-label="Adjacent dispatches">
+        {{#prev_post}}
+          <a href="{{url}}" class="terminal-card adjacent-card" id="prev-post-link">
+            <div class="terminal-card-bar">
+              <span class="terminal-card-path">&larr; prev_dispatch.sh</span>
+            </div>
+            <div class="terminal-card-body">
+              <h3 class="terminal-card-title">{{title}}</h3>
+            </div>
+          </a>
+        {{/prev_post}}
+        {{#next_post}}
+          <a href="{{url}}" class="terminal-card adjacent-card" id="next-post-link">
+            <div class="terminal-card-bar">
+              <span class="terminal-card-path">next_dispatch.sh &rarr;</span>
+            </div>
+            <div class="terminal-card-body">
+              <h3 class="terminal-card-title">{{title}}</h3>
+            </div>
+          </a>
+        {{/next_post}}
+      </nav>
+    </footer>
+  </div>
+</article>
+{{/post}}

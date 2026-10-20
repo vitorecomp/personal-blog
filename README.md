@@ -1,34 +1,60 @@
-# Portfolio Starter Kit
+# `~/vitorx86/blog` — Personal Technology Blog (`blog.vitorx86.dev`)
 
-This portfolio is built with **Next.js** and a library called [Nextra](https://nextra.vercel.app/). It allows you to write Markdown and focus on the _content_ of your portfolio. This starter includes:
+Technology blog and engineering dispatches for **Vitor** ([vitorx86.dev](https://vitorx86.dev) / [`@vitorecomp`](https://github.com/vitorecomp)), powered by **Ghost 5** (`ghost:5-alpine`) and the custom **`vitorx86-garage`** Handlebars theme.
 
-- Automatically configured to handle Markdown/MDX
-- Generates an RSS feed based on your posts
-- A beautiful theme included out of the box
-- Easily categorize posts with tags
-- Fast, optimized web font loading
+Designed in the **"Hacker's Garage"** terminal aesthetic of [`vitorx86.dev`](https://vitorx86.dev) (`JetBrains Mono`, `~$` command prompts, `#111827` floating terminal windows, `#0d9488` prompt teal, and `#4ade80` phosphor green actions).
 
-## Configuration
+## Features
 
-1. Update your name in `theme.config.js` or change the footer.
-1. Update your name and site URL for the RSS feed in `scripts/gen-rss.js`.
-1. Update the meta tags in `pages/_document.js`.
-1. Update the posts inside `pages/posts/*.md` with your own content.
+- **Ghost 5 Publishing Engine**: Turnkey Ghost 5 container pre-configured with `vitorx86-garage` as the active theme, `#0d9488` accent color, and `vitorx86.dev` navigation links (`./dispatches`, `./topics`, `./about`, `./portfolio`, `./vitorx86.dev`).
+- **Zero-Article Initial State**: Automatically strips Ghost's default `"Coming soon"` placeholder post during initialization so the blog starts cleanly with **0 articles** and displays a terminal diagnostic empty state (`~$ ls -la ~/blog/posts -> total 0`) until the first article is published in `/ghost`.
+- **Technology Topic Channels**: Pre-seeded with 4 technology tags ready for authoring in Ghost Admin:
+  - `~/blog/topics/systems-and-cli` (`#systems-and-cli` — Rust, Go, C++, search engines, Linux CLI)
+  - `~/blog/topics/ai-and-agents` (`#ai-and-agents` — Autonomous agents, MCP servers, local LLMs)
+  - `~/blog/topics/hardware-and-garage` (`#hardware-and-garage` — ESP32, embedded firmware, CAN-Bus, robotics)
+  - `~/blog/topics/cloud-and-devops` (`#cloud-and-devops` — GCP, Terraform, Linux/Wayland, Neovim)
+- **Light & Dark Garage Modes**: Defaults to Snow Paper (`#FFFAFA`) with floating `#111827` terminal cards and includes an instant `--dark` / `--light` terminal toggle in the navbar.
+- **Native Ghost Search & RSS**: Supports Ghost's native search modal (`$ grep` button or pressing `/`) and full RSS syndication (`/rss/`).
 
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/nextjs-portfolio-starter&project-name=portfolio&repository-name=portfolio)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+## Running with Podman & Podman Compose
 
 ```bash
-npx create-next-app --example blog my-blog
-# or
-yarn create next-app --example blog my-blog
+# Production build & server (http://localhost:2368)
+podman-compose -f podman-compose.yml up --build -d
+
+# Development server with live theme bind-mount (http://localhost:2368)
+podman-compose -f podman-compose.yml --profile dev up --build dev
+
+# Stop containers
+podman-compose -f podman-compose.yml --profile dev down
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Running with Docker & Docker Compose
+
+```bash
+# Production build & server (http://localhost:2368)
+docker compose up --build -d
+
+# Development server with live theme bind-mount (http://localhost:2368)
+docker compose --profile dev up --build dev
+
+# Stop containers
+docker compose --profile dev down
+```
+
+Once running:
+- **Public Blog**: `http://localhost:2368`
+- **Ghost Admin (to write & publish articles)**: `http://localhost:2368/ghost`
+
+## Validating & Packaging the Theme (`dist/vitorx86-garage.zip`)
+
+To validate the custom Ghost 5 theme structure and package it into a `.zip` archive (for uploading directly to any external Ghost instance):
+
+```bash
+npm run build
+# Outputs: dist/vitorx86-garage.zip
+```
+
+## License
+
+MIT

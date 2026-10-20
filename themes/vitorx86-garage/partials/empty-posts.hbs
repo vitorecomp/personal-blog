@@ -1,0 +1,76 @@
+<div class="terminal-empty-window" id="empty-posts-console" role="status" aria-live="polite">
+  <div class="terminal-card-bar">
+    <div class="terminal-dots" aria-hidden="true">
+      <span class="dot-red"></span>
+      <span class="dot-yellow"></span>
+      <span class="dot-green"></span>
+    </div>
+    <span class="terminal-card-path">vitor@vitorx86:~/blog/posts$ ls -la</span>
+    <span class="terminal-status-badge">[status: 0 articles]</span>
+  </div>
+
+  <div class="terminal-empty-body">
+    <div class="terminal-log-lines">
+      <p class="log-cmd">
+        <span class="dollar-muted">~$&nbsp;</span>
+        <span class="cmd-teal">ls -la ~/blog/posts</span>
+      </p>
+      <pre class="log-output">total 0
+drwxr-xr-x  2 vitor vitor 4096 {{date format="MMM DD HH:mm"}} .
+drwxr-xr-x  6 vitor vitor 4096 {{date format="MMM DD HH:mm"}} ..</pre>
+
+      <p class="log-cmd">
+        <span class="dollar-muted">~$&nbsp;</span>
+        <span class="cmd-teal">cat ./STATUS.md</span>
+      </p>
+      <div class="empty-status-box">
+        <h3 class="empty-status-title">
+          # Engineering Log Initialized &mdash; No Articles Published Yet
+        </h3>
+        <p class="empty-status-desc">
+          The <strong>vitorx86.dev</strong> Ghost publication engine is online and configured.
+          No articles have been published yet &mdash; upcoming technical dispatches will cover
+          <strong>Rust &amp; Go systems programming</strong>, <strong>AI agents &amp; MCP</strong>,
+          <strong>Linux &amp; Neovim internals</strong>, <strong>cloud infrastructure</strong>, and
+          <strong>ESP32 / automotive hardware builds</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="empty-actions-row">
+      <div class="cta-row">
+        <a
+          href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-terminal"
+          id="empty-cta-portfolio"
+        >
+          <span class="dollar-muted">$</span>
+          <span>./explore_project_docs.sh ↗</span>
+        </a>
+        <a
+          href="{{@site.url}}/rss/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-terminal-secondary"
+          id="empty-cta-rss"
+        >
+          <span class="dollar-muted">$</span>
+          <span>./subscribe_rss.sh</span>
+        </a>
+        <a
+          href="{{@site.url}}/ghost/"
+          class="btn-terminal-secondary"
+          id="empty-cta-ghost-admin"
+        >
+          <span class="dollar-muted">$</span>
+          <span>./open_ghost_admin.sh</span>
+        </a>
+      </div>
+      <span class="terminal-comment">
+        # waiting for first commit in /ghost &rarr; New post
+      </span>
+    </div>
+  </div>
+</div>

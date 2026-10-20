@@ -1,0 +1,40 @@
+{{!< default}}
+
+<section class="section-block">
+  <div class="container">
+    <div class="terminal-empty-window">
+      <div class="terminal-card-bar">
+        <div class="terminal-dots" aria-hidden="true">
+          <span class="dot-red"></span>
+          <span class="dot-yellow"></span>
+          <span class="dot-green"></span>
+        </div>
+        <span class="terminal-card-path">vitor@vitorx86:~/blog$ exit {{statusCode}}</span>
+        <span class="terminal-status-badge">[ERR_{{statusCode}}]</span>
+      </div>
+
+      <div class="terminal-empty-body">
+        <p class="eyebrow-lockup eyebrow-on-dark">
+          <span class="eyebrow-prefix-dark">~$&nbsp;</span>cat /var/log/http_{{statusCode}}.err
+        </p>
+        <h1 class="article-title">
+          {{statusCode}} &mdash; {{message}}<span class="cursor-block" aria-hidden="true">&#9612;</span>
+        </h1>
+        <p class="empty-status-desc">
+          The requested path could not be resolved by the garage terminal router.
+        </p>
+
+        <div class="cta-row">
+          <a href="{{@site.url}}" class="btn-terminal" id="error-back-home">
+            <span class="dollar-muted">$</span>
+            <span>cd ~/blog</span>
+          </a>
+          <button type="button" class="btn-terminal-secondary" data-ghost-search>
+            <span class="dollar-muted">$</span>
+            <span>./search_dispatches.sh</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

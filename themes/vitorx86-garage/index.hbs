@@ -1,0 +1,199 @@
+{{!< default}}
+
+<section class="hero-section" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <p class="eyebrow-lockup">
+          <span class="eyebrow-prefix">~$&nbsp;</span>{{#if @custom.hero_command}}{{@custom.hero_command}}{{else}}tail -f ~/blog/technology.log{{/if}}
+        </p>
+
+        <h1 id="hero-title" class="hero-title">
+          {{#if @custom.hero_headline}}{{@custom.hero_headline}}{{else}}Engineering Dispatches &amp; Garage Logs{{/if}}<span class="cursor-block" aria-hidden="true">&#9612;</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          {{#if @custom.hero_subheadline}}
+            {{@custom.hero_subheadline}}
+          {{else}}
+            Deep dives on systems programming (Rust, Go, C++), AI agents &amp; MCP, Linux internals, cloud infrastructure, and embedded hardware builds.
+          {{/if}}
+        </p>
+
+        <div class="cta-row">
+          <button
+            type="button"
+            class="btn-terminal"
+            id="hero-cta-search"
+            data-ghost-search
+          >
+            <span class="dollar-muted">$</span>
+            <span>./search_dispatches.sh</span>
+          </button>
+
+          <a href="#topics" class="btn-terminal-secondary" id="hero-cta-topics">
+            <span class="dollar-muted">$</span>
+            <span>./browse_topics.sh</span>
+          </a>
+
+          <a
+            href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-terminal-secondary"
+            id="hero-cta-portfolio"
+          >
+            <span class="dollar-muted">$</span>
+            <span>./open_portfolio.sh ↗</span>
+          </a>
+        </div>
+        <p class="terminal-comment hero-comment">
+          # vitorx86.dev technology blog &mdash; powered by Ghost 5
+        </p>
+      </div>
+
+      <aside class="hero-terminal-widget" aria-label="Blog environment telemetry">
+        <div class="terminal-card hero-sysinfo-card">
+          <div class="terminal-card-bar">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="terminal-card-path">vitor@vitorx86:~/blog$ neofetch --minimal</span>
+          </div>
+          <div class="sysinfo-body">
+            <dl class="sysinfo-list">
+              <div class="sysinfo-row">
+                <dt>host</dt>
+                <dd>blog.vitorx86.dev</dd>
+              </div>
+              <div class="sysinfo-row">
+                <dt>author</dt>
+                <dd>Vitor Vieira (@vitorecomp)</dd>
+              </div>
+              <div class="sysinfo-row">
+                <dt>engine</dt>
+                <dd>Ghost 5 + vitorx86-garage</dd>
+              </div>
+              <div class="sysinfo-row">
+                <dt>stack</dt>
+                <dd>Rust · Go · C++ · Python · Linux</dd>
+              </div>
+              <div class="sysinfo-row">
+                <dt>focus</dt>
+                <dd>Systems · AI/MCP · Embedded · Cloud</dd>
+              </div>
+              <div class="sysinfo-row">
+                <dt>dispatches</dt>
+                <dd class="sysinfo-green">
+                  {{plural pagination.total empty="0 published (standby)" singular="% published" plural="% published"}}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="dispatches" class="section-block" aria-labelledby="dispatches-heading">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow-lockup">
+          <span class="eyebrow-prefix">~$&nbsp;</span>ls -lt ~/blog/posts
+        </p>
+        <h2 id="dispatches-heading" class="section-title">
+          Latest Dispatches
+        </h2>
+      </div>
+      <div class="section-meta-pill">
+        <span class="dollar-muted">$</span>
+        <span>wc -l &rarr; {{plural pagination.total empty="0 articles" singular="% article" plural="% articles"}}</span>
+      </div>
+    </div>
+
+    {{#if posts}}
+      <div class="post-feed-grid">
+        {{#foreach posts}}
+          {{> "post-card"}}
+        {{/foreach}}
+      </div>
+
+      {{pagination}}
+    {{else}}
+      {{> "empty-posts"}}
+    {{/if}}
+  </div>
+</section>
+
+{{#if @custom.show_topic_channels}}
+  <div class="container">
+    {{> "topic-channels"}}
+  </div>
+{{/if}}
+
+<section class="garage-showcase-panel" aria-labelledby="workbench-heading">
+  <div class="container">
+    <div class="showcase-inner">
+      <div class="showcase-copy">
+        <p class="eyebrow-lockup eyebrow-on-dark">
+          <span class="eyebrow-prefix-dark">~$&nbsp;</span>whoami --verbose
+        </p>
+        <h2 id="workbench-heading" class="showcase-title">
+          The Hacker's Garage
+        </h2>
+        <p class="showcase-desc">
+          I'm Vitor &mdash; a Google software engineer who loves low-level code,
+          building vector search engines in Rust, crafting Linux CLI tools in Go,
+          experimenting with AI agents, and wrenching on embedded ESP32 hardware
+          and old project cars in the garage.
+        </p>
+        <div class="cta-row">
+          <a
+            href="{{#if @custom.main_site_url}}{{@custom.main_site_url}}{{else}}https://vitorx86.dev{{/if}}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-terminal"
+            id="showcase-cta-vitorx86"
+          >
+            <span class="dollar-muted">$</span>
+            <span>./open_vitorx86.sh ↗</span>
+          </a>
+          <a
+            href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-terminal-secondary"
+            id="showcase-cta-cases"
+          >
+            <span class="dollar-muted">$</span>
+            <span>./browse_86_repos.sh ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="showcase-terminal-box">
+        <div class="terminal-card">
+          <div class="terminal-card-bar">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="terminal-card-path">~/vitorx86/network.json</span>
+          </div>
+          <pre class="showcase-code"><code>{
+  "root": "https://vitorx86.dev",
+  "portfolio": "https://cases.vitorx86.dev",
+  "blog": "https://blog.vitorx86.dev",
+  "github": "https://github.com/vitorecomp",
+  "rss": "{{@site.url}}/rss/"
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

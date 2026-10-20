@@ -1,0 +1,9 @@
+<ul class="gh-nav-list" role="list">
+  {{#foreach navigation}}
+    <li class="gh-nav-item{{#if current}} is-current{{/if}}">
+      <a href="{{url absolute="true"}}" class="nav-exec-link">
+        <span class="slash-prefix">./</span>{{slug}}
+      </a>
+    </li>
+  {{/foreach}}
+</ul>

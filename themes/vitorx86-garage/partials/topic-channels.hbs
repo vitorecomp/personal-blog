@@ -1,0 +1,215 @@
+<section id="topics" class="section-block" aria-labelledby="topics-heading">
+  <div class="section-header">
+    <div>
+      <p class="eyebrow-lockup">
+        <span class="eyebrow-prefix">~$&nbsp;</span>tree -L 1 ~/blog/topics
+      </p>
+      <h2 id="topics-heading" class="section-title">
+        Technology Channels
+      </h2>
+      <p class="section-subtitle">
+        Articles and engineering notes are indexed by domain across systems programming,
+        AI agents, hardware tinkering, and cloud infrastructure.
+      </p>
+    </div>
+  </div>
+
+  {{#get "tags" limit="12" include="count.posts" order="count.posts desc, name asc" as |topic_tags|}}
+    {{#if topic_tags}}
+      <div class="topic-grid">
+        {{#foreach topic_tags}}
+          <article class="terminal-card topic-card">
+            <div class="terminal-card-bar">
+              <div class="terminal-dots" aria-hidden="true">
+                <span class="dot-red"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green"></span>
+              </div>
+              <span class="terminal-card-path">~/blog/topics/{{slug}}</span>
+              <span class="topic-count-badge">
+                {{plural count.posts empty="0 posts" singular="% post" plural="% posts"}}
+              </span>
+            </div>
+            <div class="terminal-card-body">
+              <div class="terminal-card-tags">
+                <span
+                  class="tag-chip {{#match slug "ai-and-agents"}}tag-indigo{{else match slug "hardware-and-garage"}}tag-pink{{else}}tag-teal{{/match}}"
+                >
+                  #{{slug}}
+                </span>
+              </div>
+              <h3 class="terminal-card-title">
+                <a href="{{url}}" class="terminal-card-title-link">{{name}}</a>
+              </h3>
+              <p class="terminal-card-excerpt">
+                {{#if description}}
+                  {{description}}
+                {{else}}
+                  Technical articles, architecture notes, and benchmarks tagged under {{name}}.
+                {{/if}}
+              </p>
+              <div class="terminal-card-footer">
+                <a href="{{url}}" class="terminal-card-action">
+                  <span class="dollar-muted">$&nbsp;</span>
+                  <span>./cd_{{slug}}.sh</span>
+                  <span class="action-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        {{/foreach}}
+      </div>
+    {{else}}
+      <div class="topic-grid">
+        <article class="terminal-card topic-card">
+          <div class="terminal-card-bar">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="terminal-card-path">~/blog/topics/systems-and-cli</span>
+            <span class="topic-count-badge">0 posts &middot; standby</span>
+          </div>
+          <div class="terminal-card-body">
+            <div class="terminal-card-tags">
+              <span class="tag-chip tag-teal">#systems-and-cli</span>
+              <span class="tag-chip tag-teal">Rust</span>
+              <span class="tag-chip tag-teal">Go</span>
+              <span class="tag-chip tag-teal">C++</span>
+            </div>
+            <h3 class="terminal-card-title">Systems, Search &amp; CLI</h3>
+            <p class="terminal-card-excerpt">
+              Low-level systems programming, vector indexes (turbovec), full-text search engines (ruscene),
+              and high-performance Linux CLI replacements (go-ls).
+            </p>
+            <div class="terminal-card-footer">
+              <a
+                href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}/systems"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="terminal-card-action"
+                id="topic-link-systems"
+              >
+                <span class="dollar-muted">$&nbsp;</span>
+                <span>./view_systems_repos.sh ↗</span>
+              </a>
+              <span class="terminal-card-author"># awaiting 1st post</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="terminal-card topic-card">
+          <div class="terminal-card-bar">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="terminal-card-path">~/blog/topics/ai-and-agents</span>
+            <span class="topic-count-badge">0 posts &middot; standby</span>
+          </div>
+          <div class="terminal-card-body">
+            <div class="terminal-card-tags">
+              <span class="tag-chip tag-indigo">#ai-and-agents</span>
+              <span class="tag-chip tag-indigo">MCP</span>
+              <span class="tag-chip tag-indigo">LLMs</span>
+            </div>
+            <h3 class="terminal-card-title">AI, Agents &amp; MCP</h3>
+            <p class="terminal-card-excerpt">
+              Agentic architectures, Model Context Protocol (MCP) servers, local LLM companions (Alissa),
+              OCR pipelines, and evolutionary training experiments.
+            </p>
+            <div class="terminal-card-footer">
+              <a
+                href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}/ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="terminal-card-action"
+                id="topic-link-ai"
+              >
+                <span class="dollar-muted">$&nbsp;</span>
+                <span>./view_ai_repos.sh ↗</span>
+              </a>
+              <span class="terminal-card-author"># awaiting 1st post</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="terminal-card topic-card">
+          <div class="terminal-card-bar">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="terminal-card-path">~/blog/topics/hardware-and-garage</span>
+            <span class="topic-count-badge">0 posts &middot; standby</span>
+          </div>
+          <div class="terminal-card-body">
+            <div class="terminal-card-tags">
+              <span class="tag-chip tag-pink">#hardware-and-garage</span>
+              <span class="tag-chip tag-pink">ESP32</span>
+              <span class="tag-chip tag-pink">CAN-Bus</span>
+            </div>
+            <h3 class="terminal-card-title">Hardware, Embedded &amp; Garage</h3>
+            <p class="terminal-card-excerpt">
+              Custom ESP32 smartwatch OS builds, embedded C/C++ firmware, telemetry sensors,
+              robotics, and backyard race car electronics.
+            </p>
+            <div class="terminal-card-footer">
+              <a
+                href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}/hardware"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="terminal-card-action"
+                id="topic-link-hardware"
+              >
+                <span class="dollar-muted">$&nbsp;</span>
+                <span>./view_hardware_repos.sh ↗</span>
+              </a>
+              <span class="terminal-card-author"># awaiting 1st post</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="terminal-card topic-card">
+          <div class="terminal-card-bar">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="terminal-card-path">~/blog/topics/cloud-and-devops</span>
+            <span class="topic-count-badge">0 posts &middot; standby</span>
+          </div>
+          <div class="terminal-card-body">
+            <div class="terminal-card-tags">
+              <span class="tag-chip tag-teal">#cloud-and-devops</span>
+              <span class="tag-chip tag-teal">GCP</span>
+              <span class="tag-chip tag-teal">Linux</span>
+            </div>
+            <h3 class="terminal-card-title">Cloud, Linux &amp; DevTools</h3>
+            <p class="terminal-card-excerpt">
+              Terraform infrastructure, Google Cloud architectures, Sway/Wayland Linux setups,
+              Neovim from scratch, and developer productivity automation.
+            </p>
+            <div class="terminal-card-footer">
+              <a
+                href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}/cloud-devtools"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="terminal-card-action"
+                id="topic-link-cloud"
+              >
+                <span class="dollar-muted">$&nbsp;</span>
+                <span>./view_cloud_repos.sh ↗</span>
+              </a>
+              <span class="terminal-card-author"># awaiting 1st post</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    {{/if}}
+  {{/get}}
+</section>

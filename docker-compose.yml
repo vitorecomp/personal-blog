@@ -1,0 +1,40 @@
+services:
+  ghost:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: personal-blog:prod
+    container_name: personal-blog-ghost
+    ports:
+      - "${PORT:-2368}:2368"
+    environment:
+      NODE_ENV: production
+      url: "${GHOST_URL:-http://localhost:2368}"
+      database__client: sqlite3
+      database__connection__filename: /var/lib/ghost/content/data/ghost.db
+    volumes:
+      - personal-blog-content:/var/lib/ghost/content
+    restart: unless-stopped
+
+  dev:
+    profiles:
+      - dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: personal-blog:dev
+    container_name: personal-blog-dev
+    ports:
+      - "${PORT:-2368}:2368"
+    environment:
+      NODE_ENV: development
+      url: "${GHOST_URL:-http://localhost:2368}"
+      database__client: sqlite3
+      database__connection__filename: /var/lib/ghost/content/data/ghost-dev.db
+    volumes:
+      - personal-blog-dev-content:/var/lib/ghost/content
+      - ./themes/vitorx86-garage:/var/lib/ghost/content/themes/vitorx86-garage
+
+volumes:
+  personal-blog-content:
+  personal-blog-dev-content:

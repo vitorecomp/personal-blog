@@ -1,0 +1,68 @@
+<article class="{{post_class}} terminal-card{{#if featured}} is-featured{{/if}}">
+  <div class="terminal-card-bar">
+    <div class="terminal-dots" aria-hidden="true">
+      <span class="dot-red"></span>
+      <span class="dot-yellow"></span>
+      <span class="dot-green"></span>
+    </div>
+    <span class="terminal-card-path">
+      ~/blog/{{#if primary_tag}}{{primary_tag.slug}}/{{/if}}{{slug}}.md
+    </span>
+    <span class="terminal-card-meta">
+      <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="YYYY-MM-DD"}}</time>
+    </span>
+  </div>
+
+  {{#if feature_image}}
+    <a href="{{url}}" class="terminal-card-image-link" aria-hidden="true" tabindex="-1">
+      <img
+        class="terminal-card-image"
+        srcset="{{img_url feature_image size="s"}} 300w,
+                {{img_url feature_image size="m"}} 600w,
+                {{img_url feature_image size="l"}} 1000w"
+        sizes="(max-width: 768px) 100vw, 420px"
+        src="{{img_url feature_image size="m"}}"
+        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+        loading="lazy"
+      />
+    </a>
+  {{/if}}
+
+  <div class="terminal-card-body">
+    <div class="terminal-card-tags">
+      {{#if featured}}
+        <span class="tag-chip tag-green">[pinned]</span>
+      {{/if}}
+      {{#if primary_tag}}
+        <a
+          href="{{primary_tag.url}}"
+          class="tag-chip {{#match primary_tag.slug "ai-and-agents"}}tag-indigo{{else match primary_tag.slug "hardware-and-garage"}}tag-pink{{else}}tag-teal{{/match}}"
+        >
+          #{{primary_tag.slug}}
+        </a>
+      {{/if}}
+      {{#if reading_time}}
+        <span class="reading-time-chip">{{reading_time}}</span>
+      {{/if}}
+    </div>
+
+    <h3 class="terminal-card-title">
+      <a href="{{url}}" class="terminal-card-title-link">{{title}}</a>
+    </h3>
+
+    {{#if excerpt}}
+      <p class="terminal-card-excerpt">{{excerpt words="32"}}</p>
+    {{/if}}
+
+    <div class="terminal-card-footer">
+      <a href="{{url}}" class="terminal-card-action">
+        <span class="dollar-muted">$&nbsp;</span>
+        <span>./read_post.sh</span>
+        <span class="action-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      {{#primary_author}}
+        <span class="terminal-card-author">@{{slug}}</span>
+      {{/primary_author}}
+    </div>
+  </div>
+</article>

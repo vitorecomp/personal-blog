@@ -1,0 +1,60 @@
+{{!< default}}
+
+<section class="section-block">
+  <div class="container">
+    {{#author}}
+      <header class="article-terminal-header">
+        <div class="terminal-card-bar">
+          <div class="terminal-dots" aria-hidden="true">
+            <span class="dot-red"></span>
+            <span class="dot-yellow"></span>
+            <span class="dot-green"></span>
+          </div>
+          <span class="terminal-card-path">~/authors/{{slug}}</span>
+          <span class="topic-count-badge">
+            {{plural ../pagination.total empty="0 dispatches" singular="% dispatch" plural="% dispatches"}}
+          </span>
+        </div>
+
+        <div class="article-header-body">
+          <p class="eyebrow-lockup eyebrow-on-dark">
+            <span class="eyebrow-prefix-dark">~$&nbsp;</span>finger {{slug}}@vitorx86.dev
+          </p>
+          <h1 class="article-title">
+            {{name}}<span class="cursor-block" aria-hidden="true">&#9612;</span>
+          </h1>
+          {{#if bio}}
+            <p class="article-excerpt">{{bio}}</p>
+          {{else}}
+            <p class="article-excerpt">
+              Software engineer at Google. Writing about systems programming, AI agents, Linux, and hardware builds.
+            </p>
+          {{/if}}
+          <div class="cta-row">
+            {{#if website}}
+              <a href="{{website}}" target="_blank" rel="noopener noreferrer" class="btn-terminal">
+                <span class="dollar-muted">$</span>
+                <span>./open_author_site.sh ↗</span>
+              </a>
+            {{/if}}
+            <a href="{{@site.url}}" class="btn-terminal-secondary">
+              <span class="dollar-muted">$</span>
+              <span>cd ~/blog</span>
+            </a>
+          </div>
+        </div>
+      </header>
+    {{/author}}
+
+    {{#if posts}}
+      <div class="post-feed-grid">
+        {{#foreach posts}}
+          {{> "post-card"}}
+        {{/foreach}}
+      </div>
+      {{pagination}}
+    {{else}}
+      {{> "empty-posts"}}
+    {{/if}}
+  </div>
+</section>

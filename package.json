@@ -1,25 +1,19 @@
 {
+  "name": "personal-blog",
+  "version": "1.0.0",
   "private": true,
+  "description": "vitorx86.dev // blog — Personal technology blog powered by Ghost 5 and the custom 'vitorx86-garage' terminal theme.",
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "dev": "next",
-    "build": "node ./scripts/gen-rss.js && next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "gray-matter": "^4.0.2",
-    "next": "12.0.8",
-    "nextra": "^2.0.0-beta.5",
-    "nextra-theme-blog": "^2.0.0-beta.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "rss": "^1.2.2"
-  },
-  "prettier": {
-    "arrowParens": "always",
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "none",
-    "semi": false
+    "validate": "node scripts/validate-theme.mjs",
+    "package": "node scripts/validate-theme.mjs && node scripts/package-theme.mjs",
+    "build": "node scripts/validate-theme.mjs && node scripts/package-theme.mjs",
+    "docker:up": "docker compose up --build -d",
+    "docker:dev": "docker compose --profile dev up --build dev",
+    "docker:down": "docker compose --profile dev down",
+    "podman:up": "podman-compose -f podman-compose.yml up --build -d",
+    "podman:dev": "podman-compose -f podman-compose.yml --profile dev up --build dev",
+    "podman:down": "podman-compose -f podman-compose.yml --profile dev down"
   }
 }

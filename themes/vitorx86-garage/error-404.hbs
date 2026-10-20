@@ -1,0 +1,40 @@
+{{!< default}}
+
+<section class="section-block">
+  <div class="container">
+    <div class="terminal-empty-window">
+      <div class="terminal-card-bar">
+        <div class="terminal-dots" aria-hidden="true">
+          <span class="dot-red"></span>
+          <span class="dot-yellow"></span>
+          <span class="dot-green"></span>
+        </div>
+        <span class="terminal-card-path">vitor@vitorx86:~/blog$ stat requested_path</span>
+        <span class="terminal-status-badge">[ENOENT: 404]</span>
+      </div>
+
+      <div class="terminal-empty-body">
+        <p class="eyebrow-lockup eyebrow-on-dark">
+          <span class="eyebrow-prefix-dark">~$&nbsp;</span>ls: cannot accesspath: No such file or directory
+        </p>
+        <h1 class="article-title">
+          404 &mdash; File Not Found<span class="cursor-block" aria-hidden="true">&#9612;</span>
+        </h1>
+        <p class="empty-status-desc">
+          The dispatch or topic channel you tried to execute does not exist at this path.
+        </p>
+
+        <div class="cta-row">
+          <a href="{{@site.url}}" class="btn-terminal" id="error-404-home">
+            <span class="dollar-muted">$</span>
+            <span>cd ~/blog</span>
+          </a>
+          <button type="button" class="btn-terminal-secondary" data-ghost-search>
+            <span class="dollar-muted">$</span>
+            <span>./search_dispatches.sh</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

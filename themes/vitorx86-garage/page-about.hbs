@@ -1,0 +1,35 @@
+{{!< default}}
+
+{{#post}}
+<article class="{{post_class}} article-shell">
+  <div class="container">
+    <header class="article-terminal-header">
+      <div class="terminal-card-bar">
+        <div class="terminal-dots" aria-hidden="true">
+          <span class="dot-red"></span>
+          <span class="dot-yellow"></span>
+          <span class="dot-green"></span>
+        </div>
+        <span class="terminal-card-path">~/blog/about.md</span>
+        <span class="terminal-card-meta">vitorx86.dev</span>
+      </div>
+
+      <div class="article-header-body">
+        <p class="eyebrow-lockup eyebrow-on-dark">
+          <span class="eyebrow-prefix-dark">~$&nbsp;</span>cat ~/blog/about.md
+        </p>
+        <h1 class="article-title">
+          {{title}}<span class="cursor-block" aria-hidden="true">&#9612;</span>
+        </h1>
+        <p class="article-excerpt">
+          Engineering notes, architecture deep-dives, and hardware garage logs by Vitor Vieira (@vitorecomp).
+        </p>
+      </div>
+    </header>
+
+    <div class="gh-content gh-canvas">
+      {{content}}
+    </div>
+  </div>
+</article>
+{{/post}}

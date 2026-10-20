@@ -1,0 +1,87 @@
+{
+  "name": "vitorx86-garage",
+  "description": "The Hacker's Garage — Official Ghost 5 technology blog theme for vitorx86.dev",
+  "version": "1.0.0",
+  "engines": {
+    "ghost": ">=5.0.0"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ghost",
+    "theme",
+    "ghost-theme",
+    "vitorx86",
+    "terminal",
+    "developer",
+    "blog"
+  ],
+  "author": {
+    "name": "Vitor Vieira",
+    "email": "vitor.ecomp@gmail.com",
+    "url": "https://vitorx86.dev"
+  },
+  "config": {
+    "posts_per_page": 9,
+    "card_assets": true,
+    "image_sizes": {
+      "xs": {
+        "width": 320
+      },
+      "s": {
+        "width": 600
+      },
+      "m": {
+        "width": 960
+      },
+      "l": {
+        "width": 1200
+      },
+      "xl": {
+        "width": 1600
+      }
+    },
+    "custom": {
+      "default_color_scheme": {
+        "type": "select",
+        "options": [
+          "Light (Snow Paper)",
+          "Dark (Terminal Ink)",
+          "System"
+        ],
+        "default": "Light (Snow Paper)"
+      },
+      "hero_command": {
+        "type": "text",
+        "default": "tail -f ~/blog/technology.log",
+        "group": "homepage"
+      },
+      "hero_headline": {
+        "type": "text",
+        "default": "Engineering Dispatches & Garage Logs",
+        "group": "homepage"
+      },
+      "hero_subheadline": {
+        "type": "text",
+        "default": "Deep dives on systems programming (Rust, Go, C++), AI agents & MCP, Linux internals, cloud infrastructure, and embedded hardware builds.",
+        "group": "homepage"
+      },
+      "show_topic_channels": {
+        "type": "boolean",
+        "default": true,
+        "group": "homepage"
+      },
+      "github_url": {
+        "type": "text",
+        "default": "https://github.com/vitorecomp"
+      },
+      "portfolio_url": {
+        "type": "text",
+        "default": "https://cases.vitorx86.dev"
+      },
+      "main_site_url": {
+        "type": "text",
+        "default": "https://vitorx86.dev"
+      }
+    }
+  }
+}

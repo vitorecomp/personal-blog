@@ -1,0 +1,159 @@
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="{{@site.url}}" class="brand-lockup" id="nav-brand-link" aria-label="{{@site.title}} — Home">
+      <span class="prompt-prefix">~$</span>
+      <span class="prompt-cmd">cd</span>
+      <span class="prompt-path">~/vitorx86/blog</span>
+      <span class="cursor-block" aria-hidden="true">&#9612;</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary Navigation">
+      <a href="{{@site.url}}" class="nav-exec-link" id="nav-link-dispatches">
+        <span class="slash-prefix">./</span>dispatches
+      </a>
+      <a href="{{@site.url}}/#topics" class="nav-exec-link" id="nav-link-topics">
+        <span class="slash-prefix">./</span>topics
+      </a>
+      <a
+        href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-exec-link"
+        id="nav-link-portfolio"
+      >
+        <span class="slash-prefix">./</span>portfolio
+      </a>
+      <a
+        href="{{#if @custom.main_site_url}}{{@custom.main_site_url}}{{else}}https://vitorx86.dev{{/if}}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-exec-link"
+        id="nav-link-main-site"
+      >
+        <span class="slash-prefix">./</span>vitorx86.dev
+      </a>
+      <a
+        href="{{#if @custom.github_url}}{{@custom.github_url}}{{else}}https://github.com/vitorecomp{{/if}}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-exec-link"
+        id="nav-link-github"
+      >
+        <span class="slash-prefix">./</span>github
+      </a>
+      <a
+        href="{{@site.url}}/rss/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-exec-link"
+        id="nav-link-rss"
+      >
+        <span class="slash-prefix">./</span>rss
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button
+        type="button"
+        class="terminal-pill-btn"
+        id="nav-search-btn"
+        data-ghost-search
+        aria-label="Search blog articles"
+        title="Search articles (Ctrl+K / /)"
+      >
+        <span class="dollar-muted">$</span>
+        <span>grep</span>
+        <kbd class="kbd-hint" aria-hidden="true">/</kbd>
+      </button>
+
+      <button
+        type="button"
+        class="terminal-pill-btn"
+        id="theme-toggle-btn"
+        aria-label="Toggle color scheme"
+        title="Toggle light/dark terminal theme"
+      >
+        <span class="dollar-muted">$</span>
+        <span class="theme-toggle-label" id="theme-toggle-text">--dark</span>
+      </button>
+
+      <button
+        type="button"
+        class="terminal-pill-btn mobile-menu-trigger"
+        id="mobile-menu-button"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Open links menu"
+      >
+        <svg
+          class="icon-sm"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
+        <span><span class="dollar-muted">$&nbsp;</span>ls</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu-drawer hidden" role="region" aria-label="Mobile Navigation">
+    <div class="container">
+      <div class="terminal-links-panel">
+        <p class="terminal-panel-caption">$ ls -la ./navigation</p>
+        <div class="mobile-links-list">
+          <a href="{{@site.url}}" class="terminal-panel-link" id="mobile-link-dispatches">
+            <span class="slash-prefix">./</span>dispatches
+          </a>
+          <a href="{{@site.url}}/#topics" class="terminal-panel-link" id="mobile-link-topics">
+            <span class="slash-prefix">./</span>topics
+          </a>
+          <a
+            href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="terminal-panel-link"
+            id="mobile-link-portfolio"
+          >
+            <span class="slash-prefix">./</span>portfolio
+          </a>
+          <a
+            href="{{#if @custom.main_site_url}}{{@custom.main_site_url}}{{else}}https://vitorx86.dev{{/if}}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="terminal-panel-link"
+            id="mobile-link-vitorx86"
+          >
+            <span class="slash-prefix">./</span>vitorx86.dev
+          </a>
+          <a
+            href="{{#if @custom.github_url}}{{@custom.github_url}}{{else}}https://github.com/vitorecomp{{/if}}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="terminal-panel-link"
+            id="mobile-link-github"
+          >
+            <span class="slash-prefix">./</span>github
+          </a>
+          <a
+            href="{{@site.url}}/rss/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="terminal-panel-link"
+            id="mobile-link-rss"
+          >
+            <span class="slash-prefix">./</span>rss
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

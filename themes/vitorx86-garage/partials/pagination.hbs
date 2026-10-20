@@ -1,0 +1,25 @@
+<nav class="terminal-pagination" aria-label="Pagination">
+  <div class="pagination-inner">
+    {{#if prev}}
+      <a class="btn-terminal-secondary" href="{{page_url prev}}" id="pagination-prev">
+        <span class="dollar-muted">$</span>
+        <span>&larr; ./prev_page.sh</span>
+      </a>
+    {{else}}
+      <span class="pagination-disabled" aria-disabled="true">$ ./prev_page.sh [EOF]</span>
+    {{/if}}
+
+    <span class="pagination-info">
+      <span class="dollar-muted">~$</span> page {{page}} of {{pages}}
+    </span>
+
+    {{#if next}}
+      <a class="btn-terminal-secondary" href="{{page_url next}}" id="pagination-next">
+        <span class="dollar-muted">$</span>
+        <span>./next_page.sh &rarr;</span>
+      </a>
+    {{else}}
+      <span class="pagination-disabled" aria-disabled="true">$ ./next_page.sh [EOF]</span>
+    {{/if}}
+  </div>
+</nav>
