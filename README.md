@@ -55,6 +55,10 @@ npm run build
 # Outputs: dist/vitorx86-garage.zip
 ```
 
+## Cloud Deployment (`personal-infra`)
+
+Production Cloud Run deployment, Artifact Registry image builds, and shared Global HTTPS Load Balancer routing (`blog.vitorx86.dev`) are managed in [`personal-infra`](https://github.com/vitorecomp/personal-infra) (`cloud/personal-blog/` and `cloud/infra/`).
+
 ## License
 
 MIT

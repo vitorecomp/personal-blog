@@ -34,7 +34,7 @@ Personal technology blog for Vitor (`vitorecomp/personal-blog`, planned for `blo
   - [`assets/css/screen.css`](./themes/vitorx86-garage/assets/css/screen.css) & [`assets/js/main.js`](./themes/vitorx86-garage/assets/js/main.js): Theme stylesheet (including all Ghost Koenig card classes) and interactive terminal script.
 - [`scripts/configure-ghost-defaults.mjs`](./scripts/configure-ghost-defaults.mjs): Patches Ghost's `default-settings.json` and `fixtures.json` during container build so Ghost initializes with `active_theme = 'vitorx86-garage'`, 4 technology topic tags, and **0 initial articles** (removing Ghost's default `"Coming soon"` post).
 - [`scripts/docker-entrypoint-vitorx86.sh`](./scripts/docker-entrypoint-vitorx86.sh): Entrypoint wrapper that ensures `vitorx86-garage` is synced into `/var/lib/ghost/content/themes/vitorx86-garage` before launching Ghost.
-- [`Dockerfile`](./Dockerfile), [`docker-compose.yml`](./docker-compose.yml), [`podman-compose.yml`](./podman-compose.yml): Container definitions for local and production deployment.
+- [`Dockerfile`](./Dockerfile), [`docker-compose.yml`](./docker-compose.yml), [`podman-compose.yml`](./podman-compose.yml): Container definitions for local and production deployment (Cloud Run + Artifact Registry + shared Load Balancer Terraform live in `personal-infra/cloud/`).
 
 ## Conventions & Guardrails
 

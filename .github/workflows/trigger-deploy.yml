@@ -1,0 +1,27 @@
+name: Trigger Deploy in personal-infra
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "themes/**"
+      - "scripts/**"
+      - "Dockerfile"
+      - "package.json"
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    name: Dispatch deploy-personal-blog to personal-infra
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send repository_dispatch event
+      env:
+        GH_TOKEN: ${{ secrets.PERSONAL_INFRA_TOKEN || secrets.METRICS_TOKEN }}
+      run: |
+        gh api repos/vitorecomp/personal-infra/dispatches \
+          --method POST \
+          -f event_type="deploy-personal-blog" \
+          -f "client_payload[sha]=${{ github.sha }}"
