@@ -12,7 +12,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 const GHOST_CURRENT = process.env.GHOST_CURRENT || '/var/lib/ghost/current'
+const GHOST_INSTALL = process.env.GHOST_INSTALL || '/var/lib/ghost'
 
+const configProdPath = path.join(GHOST_INSTALL, 'config.production.json')
 const defaultSettingsPath = path.join(
   GHOST_CURRENT,
   'core/server/data/schema/default-settings/default-settings.json'
@@ -21,6 +23,23 @@ const fixturesPath = path.join(
   GHOST_CURRENT,
   'core/server/data/schema/fixtures/fixtures.json'
 )
+
+function patchConfigProduction() {
+  if (!fs.existsSync(configProdPath)) {
+    return
+  }
+  const cfg = JSON.parse(fs.readFileSync(configProdPath, 'utf8'))
+  cfg.server = {
+    ...(cfg.server || {}),
+    host: '0.0.0.0'
+  }
+  cfg.security = {
+    ...(cfg.security || {}),
+    staffDeviceVerification: false
+  }
+  fs.writeFileSync(configProdPath, JSON.stringify(cfg, null, 2) + '\n')
+  console.log('[configure-ghost-defaults] Patched config.production.json -> staffDeviceVerification: false')
+}
 
 function patchDefaultSettings() {
   if (!fs.existsSync(defaultSettingsPath)) {
@@ -199,5 +218,6 @@ function patchFixtures() {
   console.log('[configure-ghost-defaults] Patched fixtures.json -> 0 articles, 4 tech topic tags')
 }
 
+patchConfigProduction()
 patchDefaultSettings()
 patchFixtures()

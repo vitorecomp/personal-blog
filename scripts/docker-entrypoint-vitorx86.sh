@@ -64,4 +64,11 @@ if [ -d "$THEME_SRC" ]; then
   fi
 fi
 
+# Reconcile any existing database (e.g. Cloud SQL MySQL initialized by a stock
+# ghost:5-alpine image during initial Terraform apply) so active_theme is
+# vitorx86-garage and the stock "Coming soon" post is removed before Ghost boots.
+if [ -f /usr/local/bin/reconcile-ghost-db.mjs ]; then
+  node /usr/local/bin/reconcile-ghost-db.mjs || true
+fi
+
 exec /usr/local/bin/docker-entrypoint.sh "$@"

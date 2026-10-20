@@ -2,7 +2,8 @@
 
 FROM docker.io/library/ghost:5-alpine
 
-# Install the custom vitorx86-garage theme into Ghost's seed content directory
+# Install the custom vitorx86-garage theme into both Ghost's built-in and seed theme directories
+COPY --chown=node:node themes/vitorx86-garage /var/lib/ghost/current/content/themes/vitorx86-garage
 COPY --chown=node:node themes/vitorx86-garage /var/lib/ghost/content.orig/themes/vitorx86-garage
 
 # Configure Ghost defaults:
@@ -11,11 +12,13 @@ COPY --chown=node:node themes/vitorx86-garage /var/lib/ghost/content.orig/themes
 # - 4 technology topic channels
 # - 0 initial articles/posts (removes Ghost's default "Coming soon" post)
 COPY scripts/configure-ghost-defaults.mjs /usr/local/bin/configure-ghost-defaults.mjs
+COPY scripts/reconcile-ghost-db.mjs /usr/local/bin/reconcile-ghost-db.mjs
 COPY scripts/docker-entrypoint-vitorx86.sh /usr/local/bin/docker-entrypoint-vitorx86.sh
 
-RUN chmod +x /usr/local/bin/configure-ghost-defaults.mjs /usr/local/bin/docker-entrypoint-vitorx86.sh && \
+RUN chmod +x /usr/local/bin/configure-ghost-defaults.mjs /usr/local/bin/reconcile-ghost-db.mjs /usr/local/bin/docker-entrypoint-vitorx86.sh && \
     node /usr/local/bin/configure-ghost-defaults.mjs && \
     chown node:node \
+      /var/lib/ghost/config.production.json \
       /var/lib/ghost/current/core/server/data/schema/default-settings/default-settings.json \
       /var/lib/ghost/current/core/server/data/schema/fixtures/fixtures.json
 
