@@ -5,15 +5,25 @@ set -euo pipefail
 export server__host="${server__host:-0.0.0.0}"
 export server__port="${PORT:-${server__port:-2368}}"
 
+# Disable email-based staff device verification by default so /ghost login
+# works without requiring an external SMTP server
+export security__staffDeviceVerification="${security__staffDeviceVerification:-false}"
+
+# Default to SQLite for local container runs when database__client is not set
+# (Production on Cloud Run sets database__client=mysql for Cloud SQL MySQL 8.0)
+export database__client="${database__client:-sqlite3}"
+if [ "${database__client}" = "sqlite3" ]; then
+  export database__connection__filename="${database__connection__filename:-/var/lib/ghost/content/data/ghost.db}"
+fi
+
 GHOST_CONTENT_DIR="${GHOST_CONTENT:-/var/lib/ghost/content}"
 
-# Optional Cloud Run GCS FUSE persistence sync directory (keeps SQLite on local
-# container filesystem for POSIX locking while persisting data/images to GCS)
+# Optional Cloud Run GCS FUSE persistence sync directory for uploaded media/images
 if [ -n "${GHOST_STORAGE_SYNC_DIR:-}" ] && [ -d "${GHOST_STORAGE_SYNC_DIR}" ]; then
-  mkdir -p "${GHOST_CONTENT_DIR}/data" "${GHOST_CONTENT_DIR}/images" "${GHOST_CONTENT_DIR}/files" "${GHOST_CONTENT_DIR}/settings"
-  mkdir -p "${GHOST_STORAGE_SYNC_DIR}/data" "${GHOST_STORAGE_SYNC_DIR}/images" "${GHOST_STORAGE_SYNC_DIR}/files" "${GHOST_STORAGE_SYNC_DIR}/settings"
+  mkdir -p "${GHOST_CONTENT_DIR}/images" "${GHOST_CONTENT_DIR}/files" "${GHOST_CONTENT_DIR}/settings"
+  mkdir -p "${GHOST_STORAGE_SYNC_DIR}/images" "${GHOST_STORAGE_SYNC_DIR}/files" "${GHOST_STORAGE_SYNC_DIR}/settings"
 
-  for subdir in data images files settings; do
+  for subdir in images files settings; do
     if [ -d "${GHOST_STORAGE_SYNC_DIR}/${subdir}" ] && [ -n "$(ls -A "${GHOST_STORAGE_SYNC_DIR}/${subdir}" 2>/dev/null || true)" ]; then
       cp -R "${GHOST_STORAGE_SYNC_DIR}/${subdir}/." "${GHOST_CONTENT_DIR}/${subdir}/"
     fi
@@ -21,7 +31,7 @@ if [ -n "${GHOST_STORAGE_SYNC_DIR:-}" ] && [ -d "${GHOST_STORAGE_SYNC_DIR}" ]; t
   chown -R node:node "${GHOST_CONTENT_DIR}"
 
   sync_to_storage() {
-    for subdir in data images files settings; do
+    for subdir in images files settings; do
       if [ -d "${GHOST_CONTENT_DIR}/${subdir}" ] && [ -n "$(ls -A "${GHOST_CONTENT_DIR}/${subdir}" 2>/dev/null || true)" ]; then
         cp -R "${GHOST_CONTENT_DIR}/${subdir}/." "${GHOST_STORAGE_SYNC_DIR}/${subdir}/" 2>/dev/null || true
       fi
@@ -52,6 +62,13 @@ if [ -d "$THEME_SRC" ]; then
     cp -R "$THEME_SRC" "$THEME_DEST"
     chown -R node:node "$THEME_DEST"
   fi
+fi
+
+# Seed Ghost Owner account if GHOST_ADMIN_EMAIL and GHOST_ADMIN_PASSWORD are set
+if [ -n "${GHOST_ADMIN_EMAIL:-}" ] && [ -n "${GHOST_ADMIN_PASSWORD:-}" ] && [ -f /usr/local/bin/seed-ghost-admin.mjs ]; then
+  node /usr/local/bin/seed-ghost-admin.mjs --pre-boot || true
+  chown node:node /var/lib/ghost/current/core/server/data/schema/fixtures/fixtures.json 2>/dev/null || true
+  node /usr/local/bin/seed-ghost-admin.mjs --post-boot &
 fi
 
 exec /usr/local/bin/docker-entrypoint.sh "$@"

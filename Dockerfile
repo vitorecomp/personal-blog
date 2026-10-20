@@ -11,17 +11,16 @@ COPY --chown=node:node themes/vitorx86-garage /var/lib/ghost/content.orig/themes
 # - 4 technology topic channels
 # - 0 initial articles/posts (removes Ghost's default "Coming soon" post)
 COPY scripts/configure-ghost-defaults.mjs /usr/local/bin/configure-ghost-defaults.mjs
+COPY scripts/seed-ghost-admin.mjs /usr/local/bin/seed-ghost-admin.mjs
 COPY scripts/docker-entrypoint-vitorx86.sh /usr/local/bin/docker-entrypoint-vitorx86.sh
 
-RUN chmod +x /usr/local/bin/configure-ghost-defaults.mjs /usr/local/bin/docker-entrypoint-vitorx86.sh && \
+RUN chmod +x /usr/local/bin/configure-ghost-defaults.mjs /usr/local/bin/seed-ghost-admin.mjs /usr/local/bin/docker-entrypoint-vitorx86.sh && \
     node /usr/local/bin/configure-ghost-defaults.mjs && \
     chown node:node \
       /var/lib/ghost/current/core/server/data/schema/default-settings/default-settings.json \
       /var/lib/ghost/current/core/server/data/schema/fixtures/fixtures.json
 
 ENV NODE_ENV=production
-ENV database__client=sqlite3
-ENV database__connection__filename=/var/lib/ghost/content/data/ghost.db
 ENV url=http://localhost:2368
 
 EXPOSE 2368
