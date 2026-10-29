@@ -45,6 +45,7 @@ docker compose --profile dev down
 Once running:
 - **Public Blog**: `http://localhost:2368`
 - **Ghost Admin (to write & publish articles)**: `http://localhost:2368/ghost`
+- **Port Padding (`PORT_PAD`)**: Pass `PORT_PAD=1` (or `PORT_PAD=10000` with `npm run podman:up` / `npm run docker:up`) to shift the exposed host port to `12368` (`http://localhost:12368`).
 
 ## Validating & Packaging the Theme (`dist/vitorx86-garage.zip`)
 

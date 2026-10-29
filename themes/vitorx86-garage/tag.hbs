@@ -1,54 +1,59 @@
 {{!< default}}
 
-<section class="section-block">
+<section class="devto-workspace">
   <div class="container">
-    {{#tag}}
-      <header class="article-terminal-header">
-        <div class="terminal-card-bar">
-          <div class="terminal-dots" aria-hidden="true">
-            <span class="dot-red"></span>
-            <span class="dot-yellow"></span>
-            <span class="dot-green"></span>
-          </div>
-          <span class="terminal-card-path">~/blog/topics/{{slug}}</span>
-          <span class="topic-count-badge">
-            {{plural ../pagination.total empty="0 dispatches" singular="% dispatch" plural="% dispatches"}}
-          </span>
-        </div>
+    <div class="devto-layout-grid">
+      {{> "sidebar-left"}}
 
-        <div class="article-header-body">
-          <p class="eyebrow-lockup eyebrow-on-dark">
-            <span class="eyebrow-prefix-dark">~$&nbsp;</span>ls -la ~/blog/topics/{{slug}}
-          </p>
-          <h1 class="article-title">
-            #{{name}}<span class="cursor-block" aria-hidden="true">&#9612;</span>
-          </h1>
-          <p class="article-excerpt">
-            {{#if description}}
-              {{description}}
-            {{else}}
-              Engineering dispatches, architecture notes, and experiments tagged with #{{slug}}.
-            {{/if}}
-          </p>
-          <div class="cta-row">
-            <a href="{{@site.url}}" class="btn-terminal-secondary" id="tag-back-home">
-              <span class="dollar-muted">$</span>
-              <span>cd ~/blog</span>
-            </a>
-          </div>
-        </div>
-      </header>
-    {{/tag}}
+      <div class="devto-feed-column">
+        {{#tag}}
+          <header class="article-terminal-header devto-context-banner">
+            <div class="terminal-card-bar">
+              <div class="terminal-dots" aria-hidden="true">
+                <span class="dot-red"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green"></span>
+              </div>
+              <span class="terminal-card-path">~/blog/topics/{{slug}}</span>
+              <span class="topic-count-badge">
+                {{plural ../pagination.total empty="0 dispatches" singular="% dispatch" plural="% dispatches"}}
+              </span>
+            </div>
 
-    {{#if posts}}
-      <div class="post-feed-grid">
-        {{#foreach posts}}
-          {{> "post-card"}}
-        {{/foreach}}
+            <div class="article-header-body">
+              <h1 class="article-title">
+                #{{name}}<span class="cursor-block" aria-hidden="true">&#9612;</span>
+              </h1>
+              <p class="article-excerpt">
+                {{#if description}}
+                  {{description}}
+                {{else}}
+                  Engineering dispatches, architecture notes, and experiments tagged with #{{slug}}.
+                {{/if}}
+              </p>
+              <div class="cta-row">
+                <a href="{{@site.url}}" class="btn-terminal-secondary" id="tag-back-home">
+                  <span class="dollar-muted">$</span>
+                  <span>cd ~/blog</span>
+                </a>
+              </div>
+            </div>
+          </header>
+        {{/tag}}
+
+        {{#if posts}}
+          <div class="devto-feed-stream" id="feed-stream">
+            {{#foreach posts}}
+              {{> "post-card"}}
+            {{/foreach}}
+          </div>
+          {{pagination}}
+        {{else}}
+          {{> "empty-posts"}}
+        {{/if}}
       </div>
-      {{pagination}}
-    {{else}}
-      {{> "empty-posts"}}
-    {{/if}}
+
+      {{> "sidebar-right"}}
+    </div>
   </div>
 </section>

@@ -5,6 +5,15 @@ set -euo pipefail
 export server__host="${server__host:-0.0.0.0}"
 export server__port="${PORT:-${server__port:-2368}}"
 
+# Resolve public Ghost URL:
+# 1. Explicit GHOST_URL override from Compose/CLI
+# 2. Localhost URL matching the (optionally PORT_PAD-prefixed) HOST_PORT from Compose
+if [ -n "${GHOST_URL:-}" ]; then
+  export url="${GHOST_URL}"
+elif [ -n "${HOST_PORT:-}" ]; then
+  export url="http://localhost:${HOST_PORT}"
+fi
+
 # Disable email-based staff device verification by default so /ghost login
 # works without requiring an external SMTP server
 export security__staffDeviceVerification="${security__staffDeviceVerification:-false}"

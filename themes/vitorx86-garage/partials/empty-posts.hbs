@@ -5,11 +5,19 @@
       <span class="dot-yellow"></span>
       <span class="dot-green"></span>
     </div>
-    <span class="terminal-card-path">vitor@vitorx86:~/blog/posts$ ls -la</span>
-    <span class="terminal-status-badge">[status: 0 articles]</span>
+    <span class="terminal-card-path">vitor@vitorx86:~/blog/feed$ ls -la</span>
+    <span class="terminal-status-badge">[0 posts in stream]</span>
   </div>
 
   <div class="terminal-empty-body">
+    <div class="devto-author-row empty-author-row">
+      <div class="devto-author-avatar" aria-hidden="true">V86</div>
+      <div class="devto-author-meta">
+        <span class="devto-author-name">Vitor Vieira (@vitorecomp)</span>
+        <span class="devto-post-date">stream status: standby &middot; waiting for first dispatch</span>
+      </div>
+    </div>
+
     <div class="terminal-log-lines">
       <p class="log-cmd">
         <span class="dollar-muted">~$&nbsp;</span>
@@ -19,20 +27,15 @@
 drwxr-xr-x  2 vitor vitor 4096 {{date format="MMM DD HH:mm"}} .
 drwxr-xr-x  6 vitor vitor 4096 {{date format="MMM DD HH:mm"}} ..</pre>
 
-      <p class="log-cmd">
-        <span class="dollar-muted">~$&nbsp;</span>
-        <span class="cmd-teal">cat ./STATUS.md</span>
-      </p>
       <div class="empty-status-box">
         <h3 class="empty-status-title">
-          # Engineering Log Initialized &mdash; No Articles Published Yet
+          # No Dispatches Published in This Feed Yet
         </h3>
         <p class="empty-status-desc">
-          The <strong>vitorx86.dev</strong> Ghost publication engine is online and configured.
-          No articles have been published yet &mdash; upcoming technical dispatches will cover
-          <strong>Rust &amp; Go systems programming</strong>, <strong>AI agents &amp; MCP</strong>,
-          <strong>Linux &amp; Neovim internals</strong>, <strong>cloud infrastructure</strong>, and
-          <strong>ESP32 / automotive hardware builds</strong>.
+          The <strong>vitorx86.dev</strong> Ghost publication stream is online.
+          Upcoming articles will appear here in chronological feed order covering
+          <strong>#systems-and-cli</strong> (Rust, Go, C++), <strong>#ai-and-agents</strong> (MCP, LLMs),
+          <strong>#hardware-and-garage</strong> (ESP32, CAN-Bus), and <strong>#cloud-and-devops</strong> (GCP, Linux, Neovim).
         </p>
       </div>
     </div>
@@ -59,18 +62,7 @@ drwxr-xr-x  6 vitor vitor 4096 {{date format="MMM DD HH:mm"}} ..</pre>
           <span class="dollar-muted">$</span>
           <span>./subscribe_rss.sh</span>
         </a>
-        <a
-          href="{{@site.url}}/ghost/"
-          class="btn-terminal-secondary"
-          id="empty-cta-ghost-admin"
-        >
-          <span class="dollar-muted">$</span>
-          <span>./open_ghost_admin.sh</span>
-        </a>
       </div>
-      <span class="terminal-comment">
-        # waiting for first commit in /ghost &rarr; New post
-      </span>
     </div>
   </div>
 </div>

@@ -1,4 +1,9 @@
-<article class="{{post_class}} terminal-card{{#if featured}} is-featured{{/if}}">
+<article
+  class="{{post_class}} terminal-card devto-feed-card{{#if featured}} is-featured{{/if}}{{#if @first}} is-first-story{{/if}}"
+  data-post-slug="{{slug}}"
+  data-post-featured="{{#if featured}}true{{else}}false{{/if}}"
+  data-post-tags="{{#foreach tags}}{{slug}} {{/foreach}}"
+>
   <div class="terminal-card-bar">
     <div class="terminal-dots" aria-hidden="true">
       <span class="dot-red"></span>
@@ -20,49 +25,82 @@
         srcset="{{img_url feature_image size="s"}} 300w,
                 {{img_url feature_image size="m"}} 600w,
                 {{img_url feature_image size="l"}} 1000w"
-        sizes="(max-width: 768px) 100vw, 420px"
-        src="{{img_url feature_image size="m"}}"
+        sizes="(max-width: 768px) 100vw, 720px"
+        src="{{img_url feature_image size="l"}}"
         alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
         loading="lazy"
       />
     </a>
   {{/if}}
 
-  <div class="terminal-card-body">
-    <div class="terminal-card-tags">
-      {{#if featured}}
-        <span class="tag-chip tag-green">[pinned]</span>
-      {{/if}}
-      {{#if primary_tag}}
-        <a
-          href="{{primary_tag.url}}"
-          class="tag-chip {{#match primary_tag.slug "ai-and-agents"}}tag-indigo{{else match primary_tag.slug "hardware-and-garage"}}tag-pink{{else}}tag-teal{{/match}}"
-        >
-          #{{primary_tag.slug}}
+  <div class="terminal-card-body devto-card-body">
+    <div class="devto-author-row">
+      {{#primary_author}}
+        <a href="{{url}}" class="devto-author-avatar" aria-label="{{name}}">
+          {{#if profile_image}}
+            <img src="{{img_url profile_image size="xs"}}" alt="{{name}}" class="devto-avatar-img" />
+          {{else}}
+            <span>V86</span>
+          {{/if}}
         </a>
-      {{/if}}
-      {{#if reading_time}}
-        <span class="reading-time-chip">{{reading_time}}</span>
+        <div class="devto-author-meta">
+          <a href="{{url}}" class="devto-author-name">{{name}}</a>
+          <span class="devto-post-date">
+            @{{slug}} &middot; <time datetime="{{../date format="YYYY-MM-DD"}}">{{../date format="MMM DD, YYYY"}}</time>
+          </span>
+        </div>
+      {{/primary_author}}
+
+      {{#if featured}}
+        <span class="tag-chip tag-green devto-pinned-badge">[pinned]</span>
       {{/if}}
     </div>
 
-    <h3 class="terminal-card-title">
-      <a href="{{url}}" class="terminal-card-title-link">{{title}}</a>
-    </h3>
+    <div class="devto-card-indented">
+      <h2 class="feed-card-title">
+        <a href="{{url}}" class="terminal-card-title-link">{{title}}</a>
+      </h2>
 
-    {{#if excerpt}}
-      <p class="terminal-card-excerpt">{{excerpt words="32"}}</p>
-    {{/if}}
+      {{#if tags}}
+        <div class="terminal-card-tags devto-tag-row">
+          {{#foreach tags}}
+            <a
+              href="{{url}}"
+              class="tag-chip {{#match slug "ai-and-agents"}}tag-indigo{{else match slug "hardware-and-garage"}}tag-pink{{else}}tag-teal{{/match}}"
+            >
+              #{{slug}}
+            </a>
+          {{/foreach}}
+        </div>
+      {{/if}}
 
-    <div class="terminal-card-footer">
-      <a href="{{url}}" class="terminal-card-action">
-        <span class="dollar-muted">$&nbsp;</span>
-        <span>./read_post.sh</span>
-        <span class="action-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-      {{#primary_author}}
-        <span class="terminal-card-author">@{{slug}}</span>
-      {{/primary_author}}
+      {{#if excerpt}}
+        <p class="terminal-card-excerpt">{{excerpt words="36"}}</p>
+      {{/if}}
+
+      <div class="terminal-card-footer devto-card-footer">
+        <a href="{{url}}" class="terminal-card-action">
+          <span class="dollar-muted">$&nbsp;</span>
+          <span>./read_post.sh</span>
+          <span class="action-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <div class="devto-card-Utils">
+          {{#if reading_time}}
+            <span class="reading-time-chip">{{reading_time}}</span>
+          {{/if}}
+          <button
+            type="button"
+            class="feed-save-btn"
+            data-save-slug="{{slug}}"
+            aria-label="Save {{title}} to reading list"
+            title="Save to local reading list"
+          >
+            <span class="dollar-muted">$</span>
+            <span class="save-btn-label">save</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </article>

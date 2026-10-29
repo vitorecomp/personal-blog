@@ -1,14 +1,33 @@
 /**
- * vitorx86-garage — Interactive Terminal Theme Controller
+ * vitorx86-garage — Interactive Terminal Theme Controller (dev.to architecture)
  * Handles:
  * 1. Light/Dark terminal scheme toggle (`--dark` / `--light`)
  * 2. Mobile `$ ls` navigation drawer toggle
  * 3. Keyboard shortcut (`/`) for Ghost Search (`data-ghost-search`)
- * 4. Automatic Table of Contents (`~$ cat ./toc.txt`) & reading progress bar
- * 5. Copy URL button (`$ ./copy_url.sh`)
+ * 4. Reading List bookmarks (`vitorx86-reading-list` in localStorage) & feed tabs (`./latest`, `./featured`, `./reading_list`)
+ * 5. Automatic Table of Contents (`~$ cat ./toc.txt`) & reading progress bar
+ * 6. Copy URL button (`cp url`)
  */
 (function () {
   'use strict';
+
+  var STORAGE_BOOKMARKS_KEY = 'vitorx86-reading-list';
+
+  function getSavedSlugs() {
+    try {
+      var raw = localStorage.getItem(STORAGE_BOOKMARKS_KEY);
+      var parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function setSavedSlugs(slugs) {
+    try {
+      localStorage.setItem(STORAGE_BOOKMARKS_KEY, JSON.stringify(slugs));
+    } catch (e) {}
+  }
 
   document.addEventListener('DOMContentLoaded', function () {
     var root = document.documentElement;
@@ -54,7 +73,11 @@
       });
     }
 
-    // 3. Keyboard shortcut "/" to trigger Ghost native search
+    // 3. Inline Search Bar ("/" shortcut focuses input directly + live feed filtering)
+    var searchInput = document.getElementById('nav-search-input');
+    var searchForm = document.getElementById('header-search-form');
+    var currentSearchQuery = '';
+
     document.addEventListener('keydown', function (e) {
       if (
         e.key === '/' &&
@@ -63,15 +86,146 @@
         ) &&
         !(document.activeElement && document.activeElement.isContentEditable)
       ) {
-        var searchTrigger = document.getElementById('nav-search-btn');
-        if (searchTrigger) {
+        if (searchInput) {
           e.preventDefault();
-          searchTrigger.click();
+          searchInput.focus();
+          searchInput.select();
         }
       }
     });
 
-    // 4. Auto-generate Table of Contents & Reading Progress on Post Pages
+    // 4. Reading List Bookmarks & dev.to Feed Filter Tabs
+    var savedBadge = document.getElementById('saved-count-badge');
+    var saveButtons = document.querySelectorAll('.feed-save-btn');
+    var feedCards = document.querySelectorAll('.devto-feed-card');
+    var filterButtons = document.querySelectorAll('[data-feed-filter]');
+    var filterEmpty = document.getElementById('feed-filter-empty');
+    var filterEmptyText = document.getElementById('feed-filter-empty-text');
+    var activeFilter = 'all';
+
+    function syncBookmarkUI() {
+      var saved = getSavedSlugs();
+      if (savedBadge) {
+        savedBadge.textContent = String(saved.length);
+      }
+      saveButtons.forEach(function (btn) {
+        var slug = btn.getAttribute('data-save-slug');
+        var isSaved = slug && saved.indexOf(slug) !== -1;
+        btn.classList.toggle('is-saved', Boolean(isSaved));
+        var label = btn.querySelector('.save-btn-label');
+        if (label) {
+          label.textContent = isSaved ? 'saved ✓' : 'save';
+        }
+      });
+    }
+
+    function applyFeedFilter(mode) {
+      if (typeof mode === 'string') {
+        activeFilter = mode;
+      }
+      var saved = getSavedSlugs();
+      var query = (currentSearchQuery || '').trim().toLowerCase();
+      var visibleCount = 0;
+
+      filterButtons.forEach(function (btn) {
+        var isMatch = btn.getAttribute('data-feed-filter') === activeFilter;
+        btn.classList.toggle('is-active', isMatch);
+        if (btn.getAttribute('role') === 'tab') {
+          btn.setAttribute('aria-selected', String(isMatch));
+        }
+      });
+
+      feedCards.forEach(function (card) {
+        var slug = card.getAttribute('data-post-slug') || '';
+        var isFeatured = card.getAttribute('data-post-featured') === 'true';
+        var show = true;
+        if (activeFilter === 'featured') {
+          show = isFeatured;
+        } else if (activeFilter === 'saved') {
+          show = saved.indexOf(slug) !== -1;
+        }
+        if (show && query) {
+          var haystack = (card.textContent || '').toLowerCase();
+          show = haystack.indexOf(query) !== -1;
+        }
+        card.classList.toggle('hidden', !show);
+        if (show) visibleCount++;
+      });
+
+      if (filterEmpty) {
+        if (feedCards.length > 0 && visibleCount === 0) {
+          filterEmpty.classList.remove('hidden');
+          if (filterEmptyText) {
+            if (query) {
+              filterEmptyText.textContent =
+                'No dispatches matching "' + currentSearchQuery.trim() + '".';
+            } else if (activeFilter === 'saved') {
+              filterEmptyText.textContent =
+                'Your local ./reading_list is empty. Click "$ save" on any dispatch card to bookmark it here.';
+            } else {
+              filterEmptyText.textContent =
+                'No featured dispatches in this stream yet.';
+            }
+          }
+        } else {
+          filterEmpty.classList.add('hidden');
+        }
+      }
+    }
+
+    if (searchInput) {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var initialQ = params.get('q');
+        if (initialQ) {
+          searchInput.value = initialQ;
+          currentSearchQuery = initialQ;
+        }
+      } catch (e) {}
+
+      searchInput.addEventListener('input', function () {
+        currentSearchQuery = searchInput.value || '';
+        applyFeedFilter();
+      });
+    }
+
+    if (searchForm && feedCards.length > 0) {
+      searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        currentSearchQuery = (searchInput && searchInput.value) || '';
+        applyFeedFilter();
+      });
+    }
+
+    saveButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var slug = btn.getAttribute('data-save-slug');
+        if (!slug) return;
+        var saved = getSavedSlugs();
+        var idx = saved.indexOf(slug);
+        if (idx === -1) {
+          saved.push(slug);
+        } else {
+          saved.splice(idx, 1);
+        }
+        setSavedSlugs(saved);
+        syncBookmarkUI();
+        if (activeFilter === 'saved') {
+          applyFeedFilter('saved');
+        }
+      });
+    });
+
+    filterButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var mode = btn.getAttribute('data-feed-filter') || 'all';
+        applyFeedFilter(mode);
+      });
+    });
+
+    syncBookmarkUI();
+
+    // 5. Auto-generate Table of Contents & Reading Progress on Post Pages
     var prose = document.getElementById('article-prose-content');
     var tocAside = document.getElementById('article-toc-aside');
     var tocNav = document.getElementById('article-toc-nav');
@@ -117,7 +271,7 @@
       );
     }
 
-    // 5. Copy Article URL Button
+    // 6. Copy Article URL Button
     var copyBtn = document.getElementById('copy-article-url-btn');
     var copyText = document.getElementById('copy-article-url-text');
     if (copyBtn && copyText) {
@@ -125,9 +279,9 @@
         var url = copyBtn.getAttribute('data-url') || window.location.href;
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(url).then(function () {
-            copyText.textContent = './copied_to_clipboard.sh ✓';
+            copyText.textContent = 'copied';
             setTimeout(function () {
-              copyText.textContent = './copy_url.sh';
+              copyText.textContent = 'url';
             }, 2200);
           });
         }

@@ -9,10 +9,11 @@ services:
     image: personal-blog:prod
     container_name: personal-blog-ghost
     ports:
-      - "${PORT:-2368}:2368"
+      - "${PORT_PAD:-}${PORT:-2368}:2368"
     environment:
       NODE_ENV: production
-      url: "${GHOST_URL:-http://localhost:2368}"
+      GHOST_URL: "${GHOST_URL:-}"
+      HOST_PORT: "${PORT_PAD:-}${PORT:-2368}"
       database__client: sqlite3
       database__connection__filename: /var/lib/ghost/content/data/ghost.db
     volumes:
@@ -28,10 +29,11 @@ services:
     image: personal-blog:dev
     container_name: personal-blog-dev
     ports:
-      - "${PORT:-2368}:2368"
+      - "${PORT_PAD:-}${PORT:-2368}:2368"
     environment:
       NODE_ENV: development
-      url: "${GHOST_URL:-http://localhost:2368}"
+      GHOST_URL: "${GHOST_URL:-}"
+      HOST_PORT: "${PORT_PAD:-}${PORT:-2368}"
       database__client: sqlite3
       database__connection__filename: /var/lib/ghost/content/data/ghost-dev.db
     volumes:

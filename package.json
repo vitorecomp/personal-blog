@@ -9,11 +9,13 @@
     "validate": "node scripts/validate-theme.mjs",
     "package": "node scripts/validate-theme.mjs && node scripts/package-theme.mjs",
     "build": "node scripts/validate-theme.mjs && node scripts/package-theme.mjs",
-    "docker:up": "docker compose up --build -d",
-    "docker:dev": "docker compose --profile dev up --build dev",
+    "seed:dummy": "node scripts/seed-dummy-posts.mjs",
+    "seed:clean": "node scripts/seed-dummy-posts.mjs --clean",
+    "docker:up": "PORT_PAD=\"${PORT_PAD%0000}\" docker compose up --build -d",
+    "docker:dev": "PORT_PAD=\"${PORT_PAD%0000}\" docker compose --profile dev up --build dev",
     "docker:down": "docker compose --profile dev down",
-    "podman:up": "podman-compose -f podman-compose.yml up --build -d",
-    "podman:dev": "podman-compose -f podman-compose.yml --profile dev up --build dev",
+    "podman:up": "PORT_PAD=\"${PORT_PAD%0000}\" podman-compose -f podman-compose.yml up --build -d",
+    "podman:dev": "PORT_PAD=\"${PORT_PAD%0000}\" podman-compose -f podman-compose.yml --profile dev up --build dev",
     "podman:down": "podman-compose -f podman-compose.yml --profile dev down"
   }
 }

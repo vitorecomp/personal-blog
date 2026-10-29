@@ -26,6 +26,8 @@ const REQUIRED_FILES = [
   'partials/header.hbs',
   'partials/footer.hbs',
   'partials/navigation.hbs',
+  'partials/sidebar-left.hbs',
+  'partials/sidebar-right.hbs',
   'partials/post-card.hbs',
   'partials/empty-posts.hbs',
   'partials/topic-channels.hbs',

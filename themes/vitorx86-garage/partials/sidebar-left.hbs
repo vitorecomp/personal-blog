@@ -1,0 +1,151 @@
+<aside class="devto-left-rail" aria-label="Blog navigation and tags">
+  <div class="terminal-card rail-card">
+    <div class="terminal-card-bar">
+      <div class="terminal-dots" aria-hidden="true">
+        <span class="dot-red"></span>
+        <span class="dot-yellow"></span>
+        <span class="dot-green"></span>
+      </div>
+      <span class="terminal-card-path">~/blog/nav</span>
+    </div>
+    <nav class="rail-nav-list" aria-label="Feed navigation">
+      <a href="{{@site.url}}" class="rail-nav-item" id="rail-link-home">
+        <span class="rail-nav-prefix">~$</span>
+        <span class="rail-nav-label">./home_feed</span>
+      </a>
+      <button
+        type="button"
+        class="rail-nav-item rail-nav-btn"
+        id="rail-reading-list-btn"
+        data-feed-filter="saved"
+      >
+        <span class="rail-nav-prefix">~$</span>
+        <span class="rail-nav-label">./reading_list</span>
+        <span class="rail-count-pill" id="saved-count-badge">0</span>
+      </button>
+      <a href="{{@site.url}}/#topics" class="rail-nav-item" id="rail-link-topics">
+        <span class="rail-nav-prefix">~$</span>
+        <span class="rail-nav-label">./topics</span>
+      </a>
+      <a href="{{@site.url}}/about/" class="rail-nav-item" id="rail-link-about">
+        <span class="rail-nav-prefix">~$</span>
+        <span class="rail-nav-label">./about.md</span>
+      </a>
+      <a
+        href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rail-nav-item"
+        id="rail-link-portfolio"
+      >
+        <span class="rail-nav-prefix">~$</span>
+        <span class="rail-nav-label">./portfolio ↗</span>
+      </a>
+      <a
+        href="{{#if @custom.main_site_url}}{{@custom.main_site_url}}{{else}}https://vitorx86.dev{{/if}}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rail-nav-item"
+        id="rail-link-vitorx86"
+      >
+        <span class="rail-nav-prefix">~$</span>
+        <span class="rail-nav-label">./vitorx86.dev ↗</span>
+      </a>
+      <a
+        href="{{@site.url}}/rss/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rail-nav-item"
+        id="rail-link-rss"
+      >
+        <span class="rail-nav-prefix">~$</span>
+        <span class="rail-nav-label">./rss.xml</span>
+      </a>
+    </nav>
+  </div>
+
+  <div class="terminal-card rail-card">
+    <div class="terminal-card-bar">
+      <div class="terminal-dots" aria-hidden="true">
+        <span class="dot-red"></span>
+        <span class="dot-yellow"></span>
+        <span class="dot-green"></span>
+      </div>
+      <span class="terminal-card-path">~/blog/tags</span>
+    </div>
+    <div class="rail-tags-body">
+      <p class="rail-section-heading">$ ls ./popular_tags</p>
+      {{#get "tags" limit="16" include="count.posts" order="count.posts desc, name asc" as |sidebar_tags|}}
+        {{#if sidebar_tags}}
+          <div class="rail-tags-list">
+            {{#foreach sidebar_tags}}
+              <a href="{{url}}" class="rail-tag-link" id="rail-tag-{{slug}}">
+                <span class="rail-tag-hash {{#match slug "ai-and-agents"}}hash-indigo{{else match slug "hardware-and-garage"}}hash-pink{{else}}hash-teal{{/match}}">#</span>
+                <span class="rail-tag-slug">{{slug}}</span>
+                <span class="rail-count-pill">{{count.posts}}</span>
+              </a>
+            {{/foreach}}
+          </div>
+        {{else}}
+          <div class="rail-tags-list">
+            <a href="{{@site.url}}/tag/systems-and-cli/" class="rail-tag-link">
+              <span class="rail-tag-hash hash-teal">#</span>
+              <span class="rail-tag-slug">systems-and-cli</span>
+              <span class="rail-count-pill">0</span>
+            </a>
+            <a href="{{@site.url}}/tag/ai-and-agents/" class="rail-tag-link">
+              <span class="rail-tag-hash hash-indigo">#</span>
+              <span class="rail-tag-slug">ai-and-agents</span>
+              <span class="rail-count-pill">0</span>
+            </a>
+            <a href="{{@site.url}}/tag/hardware-and-garage/" class="rail-tag-link">
+              <span class="rail-tag-hash hash-pink">#</span>
+              <span class="rail-tag-slug">hardware-and-garage</span>
+              <span class="rail-count-pill">0</span>
+            </a>
+            <a href="{{@site.url}}/tag/cloud-and-devops/" class="rail-tag-link">
+              <span class="rail-tag-hash hash-teal">#</span>
+              <span class="rail-tag-slug">cloud-and-devops</span>
+              <span class="rail-count-pill">0</span>
+            </a>
+          </div>
+        {{/if}}
+      {{/get}}
+    </div>
+  </div>
+
+  <div class="terminal-card rail-card">
+    <div class="terminal-card-bar">
+      <span class="terminal-card-path">~/vitorx86/links</span>
+    </div>
+    <div class="rail-social-row">
+      <a
+        href="{{#if @custom.github_url}}{{@custom.github_url}}{{else}}https://github.com/vitorecomp{{/if}}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rail-social-pill"
+        aria-label="GitHub (@vitorecomp)"
+      >
+        ./github ↗
+      </a>
+      <a
+        href="https://www.linkedin.com/in/vieiravitor"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rail-social-pill"
+        aria-label="LinkedIn (vieiravitor)"
+      >
+        ./linkedin ↗
+      </a>
+      <a
+        href="{{@site.url}}/rss/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rail-social-pill"
+        aria-label="RSS Feed"
+      >
+        ./rss ↗
+      </a>
+    </div>
+  </div>
+</aside>
