@@ -1,51 +1,49 @@
 {{!< default}}
 
 {{#post}}
-<article class="{{post_class}} article-shell">
+<article class="{{post_class}} devto-workspace">
   <div class="container">
-    {{#match @page.show_title_and_feature_image}}
-      <header class="article-terminal-header">
-        <div class="terminal-card-bar">
-          <div class="terminal-dots" aria-hidden="true">
-            <span class="dot-red"></span>
-            <span class="dot-yellow"></span>
-            <span class="dot-green"></span>
+    <div class="clean-page-wrapper">
+      <div class="clean-article-card">
+        {{#match @page.show_title_and_feature_image}}
+          {{#if feature_image}}
+            <figure class="article-cover-figure">
+              <img
+                srcset="{{img_url feature_image size="s"}} 300w,
+                        {{img_url feature_image size="m"}} 600w,
+                        {{img_url feature_image size="l"}} 1000w,
+                        {{img_url feature_image size="xl"}} 1600w"
+                sizes="(max-width: 1120px) 100vw, 800px"
+                src="{{img_url feature_image size="xl"}}"
+                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                class="article-feature-image"
+              />
+              {{#if feature_image_caption}}
+                <figcaption class="article-feature-caption">{{feature_image_caption}}</figcaption>
+              {{/if}}
+            </figure>
+          {{/if}}
+
+          <div class="clean-article-inner">
+            <header class="clean-article-header">
+              <h1 class="clean-article-title">{{title}}</h1>
+              {{#if custom_excerpt}}
+                <p class="clean-article-lead">{{custom_excerpt}}</p>
+              {{/if}}
+            </header>
+
+            <div class="gh-content gh-canvas">
+              {{content}}
+            </div>
           </div>
-          <span class="terminal-card-path">~/blog/{{slug}}.md</span>
-        </div>
-
-        <div class="article-header-body">
-          <p class="eyebrow-lockup eyebrow-on-dark">
-            <span class="eyebrow-prefix-dark">~$&nbsp;</span>cat ./{{slug}}.md
-          </p>
-          <h1 class="article-title">{{title}}</h1>
-          {{#if custom_excerpt}}
-            <p class="article-excerpt">{{custom_excerpt}}</p>
-          {{/if}}
-        </div>
-      </header>
-
-      {{#if feature_image}}
-        <figure class="article-feature-figure">
-          <img
-            srcset="{{img_url feature_image size="s"}} 300w,
-                    {{img_url feature_image size="m"}} 600w,
-                    {{img_url feature_image size="l"}} 1000w,
-                    {{img_url feature_image size="xl"}} 1600w"
-            sizes="(max-width: 1120px) 100vw, 1120px"
-            src="{{img_url feature_image size="xl"}}"
-            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
-            class="article-feature-image"
-          />
-          {{#if feature_image_caption}}
-            <figcaption class="article-feature-caption">{{feature_image_caption}}</figcaption>
-          {{/if}}
-        </figure>
-      {{/if}}
-    {{/match}}
-
-    <div class="gh-content gh-canvas">
-      {{content}}
+        {{else}}
+          <div class="clean-article-inner">
+            <div class="gh-content gh-canvas">
+              {{content}}
+            </div>
+          </div>
+        {{/match}}
+      </div>
     </div>
   </div>
 </article>

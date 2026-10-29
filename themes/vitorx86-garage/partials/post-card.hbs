@@ -1,23 +1,9 @@
 <article
-  class="{{post_class}} terminal-card devto-feed-card{{#if featured}} is-featured{{/if}}{{#if @first}} is-first-story{{/if}}"
+  class="{{post_class}} clean-feed-card devto-feed-card{{#if featured}} is-featured{{/if}}{{#if @first}} is-first-story{{/if}}"
   data-post-slug="{{slug}}"
   data-post-featured="{{#if featured}}true{{else}}false{{/if}}"
   data-post-tags="{{#foreach tags}}{{slug}} {{/foreach}}"
 >
-  <div class="terminal-card-bar">
-    <div class="terminal-dots" aria-hidden="true">
-      <span class="dot-red"></span>
-      <span class="dot-yellow"></span>
-      <span class="dot-green"></span>
-    </div>
-    <span class="terminal-card-path">
-      ~/blog/{{#if primary_tag}}{{primary_tag.slug}}/{{/if}}{{slug}}.md
-    </span>
-    <span class="terminal-card-meta">
-      <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="YYYY-MM-DD"}}</time>
-    </span>
-  </div>
-
   {{#if feature_image}}
     <a href="{{url}}" class="terminal-card-image-link" aria-hidden="true" tabindex="-1">
       <img
@@ -33,7 +19,7 @@
     </a>
   {{/if}}
 
-  <div class="terminal-card-body devto-card-body">
+  <div class="clean-feed-card-body">
     <div class="devto-author-row">
       {{#primary_author}}
         <a href="{{url}}" class="devto-author-avatar" aria-label="{{name}}">
@@ -44,30 +30,27 @@
           {{/if}}
         </a>
         <div class="devto-author-meta">
-          <a href="{{url}}" class="devto-author-name">{{name}}</a>
-          <span class="devto-post-date">
-            @{{slug}} &middot; <time datetime="{{../date format="YYYY-MM-DD"}}">{{../date format="MMM DD, YYYY"}}</time>
+          <a href="{{url}}" class="clean-author-name">{{name}}</a>
+          <span class="clean-post-date">
+            <time datetime="{{../date format="YYYY-MM-DD"}}">{{../date format="MMM DD, YYYY"}}</time>
           </span>
         </div>
       {{/primary_author}}
 
       {{#if featured}}
-        <span class="tag-chip tag-green devto-pinned-badge">[pinned]</span>
+        <span class="clean-pinned-badge">Pinned</span>
       {{/if}}
     </div>
 
     <div class="devto-card-indented">
-      <h2 class="feed-card-title">
-        <a href="{{url}}" class="terminal-card-title-link">{{title}}</a>
+      <h2 class="clean-feed-title">
+        <a href="{{url}}" class="clean-feed-title-link">{{title}}</a>
       </h2>
 
       {{#if tags}}
-        <div class="terminal-card-tags devto-tag-row">
+        <div class="clean-tag-row">
           {{#foreach tags}}
-            <a
-              href="{{url}}"
-              class="tag-chip {{#match slug "ai-and-agents"}}tag-indigo{{else match slug "hardware-and-garage"}}tag-pink{{else}}tag-teal{{/match}}"
-            >
+            <a href="{{url}}" class="clean-tag-chip">
               #{{slug}}
             </a>
           {{/foreach}}
@@ -75,29 +58,30 @@
       {{/if}}
 
       {{#if excerpt}}
-        <p class="terminal-card-excerpt">{{excerpt words="36"}}</p>
+        <p class="clean-feed-excerpt">{{excerpt words="36"}}</p>
       {{/if}}
 
-      <div class="terminal-card-footer devto-card-footer">
-        <a href="{{url}}" class="terminal-card-action">
-          <span class="dollar-muted">$&nbsp;</span>
-          <span>./read_post.sh</span>
+      <div class="clean-feed-footer">
+        <a href="{{url}}" class="clean-read-link">
+          <span>Read article</span>
           <span class="action-arrow" aria-hidden="true">&rarr;</span>
         </a>
 
         <div class="devto-card-Utils">
           {{#if reading_time}}
-            <span class="reading-time-chip">{{reading_time}}</span>
+            <span class="clean-reading-time">{{reading_time}}</span>
           {{/if}}
           <button
             type="button"
-            class="feed-save-btn"
+            class="clean-save-btn feed-save-btn"
             data-save-slug="{{slug}}"
             aria-label="Save {{title}} to reading list"
-            title="Save to local reading list"
+            title="Save to reading list"
           >
-            <span class="dollar-muted">$</span>
-            <span class="save-btn-label">save</span>
+            <svg class="save-icon-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+            </svg>
+            <span class="save-btn-label">Save</span>
           </button>
         </div>
       </div>

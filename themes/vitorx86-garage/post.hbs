@@ -15,8 +15,10 @@
             aria-label="Save article to reading list"
             title="Save to reading list"
           >
-            <span class="action-rail-icon" aria-hidden="true">[+]</span>
-            <span class="save-btn-label action-rail-label">save</span>
+            <svg class="action-rail-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+            </svg>
+            <span class="save-btn-label action-rail-label">Save</span>
           </button>
 
           <button
@@ -27,8 +29,10 @@
             aria-label="Copy article link"
             title="Copy article URL"
           >
-            <span class="action-rail-icon" aria-hidden="true">cp</span>
-            <span class="action-rail-label" id="copy-article-url-text">url</span>
+            <svg class="action-rail-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+            </svg>
+            <span class="action-rail-label" id="copy-article-url-text">Copy</span>
           </button>
 
           <a
@@ -38,29 +42,16 @@
             aria-label="Back to feed"
             title="Back to feed"
           >
-            <span class="action-rail-icon" aria-hidden="true">&larr;</span>
-            <span class="action-rail-label">feed</span>
+            <svg class="action-rail-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+            </svg>
+            <span class="action-rail-label">Feed</span>
           </a>
         </div>
       </aside>
 
       <div class="devto-article-main">
-        <header class="article-terminal-header">
-          <div class="terminal-card-bar">
-            <div class="terminal-dots" aria-hidden="true">
-              <span class="dot-red"></span>
-              <span class="dot-yellow"></span>
-              <span class="dot-green"></span>
-            </div>
-            <span class="terminal-card-path">
-              ~/blog/{{#if primary_tag}}{{primary_tag.slug}}/{{/if}}{{slug}}.md
-            </span>
-            <span class="terminal-card-meta">
-              <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="YYYY-MM-DD"}}</time>
-              {{#if reading_time}} &middot; {{reading_time}}{{/if}}
-            </span>
-          </div>
-
+        <div class="clean-article-card">
           {{#if feature_image}}
             <figure class="article-cover-figure">
               <img
@@ -79,79 +70,65 @@
             </figure>
           {{/if}}
 
-          <div class="article-header-body">
-            <div class="devto-author-row article-author-row">
-              {{#primary_author}}
-                <a href="{{url}}" class="devto-author-avatar" aria-label="{{name}}">
-                  {{#if profile_image}}
-                    <img src="{{img_url profile_image size="xs"}}" alt="{{name}}" class="devto-avatar-img" />
-                  {{else}}
-                    <span>V86</span>
-                  {{/if}}
-                </a>
-                <div class="devto-author-meta">
-                  <a href="{{url}}" class="devto-author-name">{{name}}</a>
-                  <span class="devto-post-date">
-                    Posted on <time datetime="{{../date format="YYYY-MM-DD"}}">{{../date format="MMM DD, YYYY"}}</time>
-                    {{#if ../reading_time}} &middot; {{../reading_time}}{{/if}}
-                  </span>
-                </div>
-              {{/primary_author}}
-            </div>
-
-            <h1 class="article-title">{{title}}</h1>
-
-            {{#if tags}}
-              <div class="terminal-card-tags article-tag-row">
-                {{#foreach tags}}
-                  <a
-                    href="{{url}}"
-                    class="tag-chip {{#match slug "ai-and-agents"}}tag-indigo{{else match slug "hardware-and-garage"}}tag-pink{{else}}tag-teal{{/match}}"
-                  >
-                    #{{slug}}
+          <div class="clean-article-inner">
+            <header class="clean-article-header">
+              <div class="devto-author-row article-author-row">
+                {{#primary_author}}
+                  <a href="{{url}}" class="devto-author-avatar" aria-label="{{name}}">
+                    {{#if profile_image}}
+                      <img src="{{img_url profile_image size="xs"}}" alt="{{name}}" class="devto-avatar-img" />
+                    {{else}}
+                      <span>V86</span>
+                    {{/if}}
                   </a>
-                {{/foreach}}
+                  <div class="devto-author-meta">
+                    <a href="{{url}}" class="clean-author-name">{{name}}</a>
+                    <span class="clean-post-date">
+                      Posted on <time datetime="{{../date format="YYYY-MM-DD"}}">{{../date format="MMM DD, YYYY"}}</time>
+                      {{#if ../reading_time}} &middot; {{../reading_time}}{{/if}}
+                    </span>
+                  </div>
+                {{/primary_author}}
               </div>
-            {{/if}}
 
-            {{#if custom_excerpt}}
-              <p class="article-excerpt">{{custom_excerpt}}</p>
-            {{/if}}
-          </div>
-        </header>
+              <h1 class="clean-article-title">{{title}}</h1>
 
-        <div class="devto-prose-card">
-          <div class="gh-content gh-canvas" id="article-prose-content">
-            {{content}}
+              {{#if tags}}
+                <div class="clean-tag-row">
+                  {{#foreach tags}}
+                    <a href="{{url}}" class="clean-tag-chip">
+                      #{{slug}}
+                    </a>
+                  {{/foreach}}
+                </div>
+              {{/if}}
+
+              {{#if custom_excerpt}}
+                <p class="clean-article-lead">{{custom_excerpt}}</p>
+              {{/if}}
+            </header>
+
+            <div class="gh-content gh-canvas" id="article-prose-content">
+              {{content}}
+            </div>
           </div>
         </div>
 
         <footer class="article-footer">
-          <div class="terminal-card article-share-card">
-            <div class="terminal-card-bar">
-              <div class="terminal-dots" aria-hidden="true">
-                <span class="dot-red"></span>
-                <span class="dot-yellow"></span>
-                <span class="dot-green"></span>
-              </div>
-              <span class="terminal-card-path">~/blog/eof.sh</span>
+          <div class="clean-share-card">
+            <div>
+              <h3 class="clean-share-title">Enjoyed this article?</h3>
+              <p class="clean-share-copy">
+                Save it to your reading list or subscribe to the RSS feed for future engineering dispatches.
+              </p>
             </div>
-            <div class="article-share-body">
-              <div>
-                <p class="share-copy">
-                  Enjoyed this dispatch? Save it to your reading list or subscribe via RSS.
-                </p>
-              </div>
-              <div class="cta-row">
-                <a href="{{@site.url}}/rss/" target="_blank" rel="noopener noreferrer" class="btn-terminal">
-                  <span class="dollar-muted">$</span>
-                  <span>./subscribe_rss.sh</span>
-                </a>
-                <a href="{{@site.url}}" class="btn-terminal-secondary" id="back-to-blog-btn">
-                  <span class="dollar-muted">$</span>
-                  <span>cd ~/blog</span>
-                </a>
-              </div>
+            <div class="cta-row">
+              <a href="{{@site.url}}/rss/" target="_blank" rel="noopener noreferrer" class="clean-btn-primary">
+                Subscribe via RSS
+              </a>
+              <a href="{{@site.url}}" class="clean-btn-secondary" id="back-to-blog-btn">
+                &larr; Back to Feed
+              </a>
             </div>
           </div>
 
@@ -161,25 +138,17 @@
             </section>
           {{/if}}
 
-          <nav class="post-adjacent-nav" aria-label="Adjacent dispatches">
+          <nav class="post-adjacent-nav" aria-label="More articles">
             {{#prev_post}}
-              <a href="{{url}}" class="terminal-card adjacent-card" id="prev-post-link">
-                <div class="terminal-card-bar">
-                  <span class="terminal-card-path">&larr; prev_dispatch.sh</span>
-                </div>
-                <div class="terminal-card-body">
-                  <h3 class="terminal-card-title">{{title}}</h3>
-                </div>
+              <a href="{{url}}" class="clean-adjacent-card" id="prev-post-link">
+                <span class="clean-adjacent-label">&larr; Previous article</span>
+                <h3 class="clean-adjacent-title">{{title}}</h3>
               </a>
             {{/prev_post}}
             {{#next_post}}
-              <a href="{{url}}" class="terminal-card adjacent-card" id="next-post-link">
-                <div class="terminal-card-bar">
-                  <span class="terminal-card-path">next_dispatch.sh &rarr;</span>
-                </div>
-                <div class="terminal-card-body">
-                  <h3 class="terminal-card-title">{{title}}</h3>
-                </div>
+              <a href="{{url}}" class="clean-adjacent-card" id="next-post-link">
+                <span class="clean-adjacent-label">Next article &rarr;</span>
+                <h3 class="clean-adjacent-title">{{title}}</h3>
               </a>
             {{/next_post}}
           </nav>
@@ -189,57 +158,42 @@
       <aside class="devto-article-sidebar" aria-label="Author info and table of contents">
         <div class="article-sticky-stack">
           {{#primary_author}}
-            <div class="terminal-card rail-card">
-              <div class="terminal-card-bar">
-                <div class="terminal-dots" aria-hidden="true">
-                  <span class="dot-red"></span>
-                  <span class="dot-yellow"></span>
-                  <span class="dot-green"></span>
-                </div>
-                <span class="terminal-card-path">~/authors/{{slug}}</span>
-              </div>
-              <div class="rail-profile-body">
+            <div class="clean-sidebar-card">
+              <div class="clean-sidebar-accent"></div>
+              <div class="clean-sidebar-body">
                 <div class="rail-profile-header">
-                  <div class="rail-avatar-badge" aria-hidden="true">V86</div>
+                  <div class="devto-author-avatar" aria-hidden="true">V86</div>
                   <div>
-                    <h2 class="rail-profile-name">
+                    <h2 class="clean-sidebar-author-name">
                       <a href="{{url}}">{{name}}</a>
                     </h2>
-                    <p class="rail-profile-handle">@{{slug}} &middot; Google SWE</p>
+                    <p class="clean-sidebar-author-role">@{{slug}} &middot; Google SWE</p>
                   </div>
                 </div>
-                <p class="rail-profile-bio">
+                <p class="clean-sidebar-bio">
                   {{#if bio}}
                     {{bio}}
                   {{else}}
                     Systems programming (Rust, Go, C++), autonomous AI agents &amp; MCP, Linux internals, cloud infrastructure, and embedded hardware builds.
                   {{/if}}
                 </p>
-                <div class="rail-profile-actions">
-                  <a
-                    href="{{#if @custom.main_site_url}}{{@custom.main_site_url}}{{else}}https://vitorx86.dev{{/if}}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-terminal rail-btn-full"
-                  >
-                    <span class="dollar-muted">$</span>
-                    <span>./vitorx86.dev ↗</span>
-                  </a>
-                </div>
+                <a
+                  href="{{#if @custom.main_site_url}}{{@custom.main_site_url}}{{else}}https://vitorx86.dev{{/if}}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="clean-btn-primary rail-btn-full"
+                >
+                  Visit vitorx86.dev ↗
+                </a>
               </div>
             </div>
           {{/primary_author}}
 
-          <div class="terminal-card toc-card" id="article-toc-aside" hidden>
-            <div class="terminal-card-bar">
-              <div class="terminal-dots" aria-hidden="true">
-                <span class="dot-red"></span>
-                <span class="dot-yellow"></span>
-                <span class="dot-green"></span>
-              </div>
-              <span class="terminal-card-path">~$ cat ./toc.txt</span>
+          <div class="clean-sidebar-card" id="article-toc-aside" hidden>
+            <div class="clean-sidebar-body">
+              <h3 class="clean-toc-heading">On this page</h3>
+              <nav class="clean-toc-nav" id="article-toc-nav" aria-label="Article sections"></nav>
             </div>
-            <nav class="toc-body" id="article-toc-nav" aria-label="Article sections"></nav>
           </div>
         </div>
       </aside>

@@ -1,34 +1,23 @@
 {{!< default}}
 
 {{#post}}
-<article class="{{post_class}} article-shell">
+<article class="{{post_class}} devto-workspace">
   <div class="container">
-    <header class="article-terminal-header">
-      <div class="terminal-card-bar">
-        <div class="terminal-dots" aria-hidden="true">
-          <span class="dot-red"></span>
-          <span class="dot-yellow"></span>
-          <span class="dot-green"></span>
+    <div class="clean-page-wrapper">
+      <div class="clean-article-card">
+        <div class="clean-article-inner">
+          <header class="clean-article-header">
+            <h1 class="clean-article-title">{{title}}</h1>
+            <p class="clean-article-lead">
+              Engineering notes, architecture deep-dives, and hardware garage logs by Vitor Vieira (@vitorecomp).
+            </p>
+          </header>
+
+          <div class="gh-content gh-canvas">
+            {{content}}
+          </div>
         </div>
-        <span class="terminal-card-path">~/blog/about.md</span>
-        <span class="terminal-card-meta">vitorx86.dev</span>
       </div>
-
-      <div class="article-header-body">
-        <p class="eyebrow-lockup eyebrow-on-dark">
-          <span class="eyebrow-prefix-dark">~$&nbsp;</span>cat ~/blog/about.md
-        </p>
-        <h1 class="article-title">
-          {{title}}<span class="cursor-block" aria-hidden="true">&#9612;</span>
-        </h1>
-        <p class="article-excerpt">
-          Engineering notes, architecture deep-dives, and hardware garage logs by Vitor Vieira (@vitorecomp).
-        </p>
-      </div>
-    </header>
-
-    <div class="gh-content gh-canvas">
-      {{content}}
     </div>
   </div>
 </article>

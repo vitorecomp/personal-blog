@@ -114,7 +114,7 @@
         btn.classList.toggle('is-saved', Boolean(isSaved));
         var label = btn.querySelector('.save-btn-label');
         if (label) {
-          label.textContent = isSaved ? 'saved ✓' : 'save';
+          label.textContent = isSaved ? 'Saved' : 'Save';
         }
       });
     }
@@ -246,10 +246,8 @@
           var link = document.createElement('a');
           link.href = '#' + heading.id;
           link.className =
-            'toc-link' + (heading.tagName === 'H3' ? ' toc-link-h3' : '');
-          link.textContent =
-            (heading.tagName === 'H3' ? '  └─ ' : './') +
-            (heading.textContent || '');
+            'clean-toc-link' + (heading.tagName === 'H3' ? ' clean-toc-link-h3' : '');
+          link.textContent = heading.textContent || '';
           tocNav.appendChild(link);
         });
         tocAside.hidden = false;
@@ -279,9 +277,9 @@
         var url = copyBtn.getAttribute('data-url') || window.location.href;
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(url).then(function () {
-            copyText.textContent = 'copied';
+            copyText.textContent = 'Copied';
             setTimeout(function () {
-              copyText.textContent = 'url';
+              copyText.textContent = 'Copy';
             }, 2200);
           });
         }
