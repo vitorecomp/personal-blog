@@ -1,164 +1,118 @@
-<aside class="devto-right-rail" aria-label="Author bio and topic channels">
-  <div class="terminal-card rail-card">
-    <div class="terminal-card-bar">
-      <div class="terminal-dots" aria-hidden="true">
-        <span class="dot-red"></span>
-        <span class="dot-yellow"></span>
-        <span class="dot-green"></span>
-      </div>
-      <span class="terminal-card-path">~$ {{#if @custom.hero_command}}{{@custom.hero_command}}{{else}}whoami{{/if}}</span>
+<aside class="devto-right-rail" aria-label="Industrial engineering datasheet">
+  <div class="arc-datasheet">
+    <div class="arc-orange-spine" aria-hidden="true">
+      <span class="arc-spine-logo">001 v01</span>
+      <span class="arc-spine-vertical">Myself spreadsheet</span>
+      <span class="arc-spine-arrow">&#8599;</span>
     </div>
-    <div class="rail-profile-body">
-      <div class="rail-profile-header">
-        <div class="rail-avatar-badge" aria-hidden="true">V86</div>
-        <div>
-          <h2 class="rail-profile-name">Vitor Vieira</h2>
-          <p class="rail-profile-handle">@vitorecomp &middot; {{#if @custom.hero_headline}}{{@custom.hero_headline}}{{else}}Engineering Dispatches{{/if}}</p>
+
+    <div class="arc-sheet-main">
+      <header class="arc-topbar">
+        <span>{{#if @custom.hero_command}}{{@custom.hero_command}}{{else}}V86 / SYSTEMS FOR PRODUCTION{{/if}}</span>
+        <span>SERIAL NO. 001</span>
+      </header>
+
+      <div class="arc-hero-block" data-hero-headline="{{@custom.hero_headline}}">
+        <h2 class="arc-hero-title">
+          vitorx86.dev&reg;<br />
+          Engineering blog
+        </h2>
+        <p class="arc-hero-desc">
+          {{#if @custom.hero_subheadline}}
+            {{@custom.hero_subheadline}}
+          {{else}}
+            Adaptive systems engineering log by Vitor Vieira (@vitorecomp). Built for low-level performance in Rust, Go, and C++, autonomous AI agents, and embedded garage robotics.
+          {{/if}}
+        </p>
+      </div>
+
+      <div class="arc-diagram-block">
+        <div class="arc-diagram-header">
+          <h3 class="arc-diagram-title">
+            Plug-and-Run<br />Engineering Unit
+          </h3>
+          <p class="arc-diagram-kicker">
+            REAL-TIME AI &amp; SYSTEMS<br />TELEMETRY MODULE
+          </p>
+        </div>
+
+        <div class="arc-robot-stage">
+          <div class="arc-callout arc-callout-tl">
+            <span class="arc-callout-title">WRIST UNIT</span>
+            <span class="arc-callout-sub">3D printed opensource arm</span>
+          </div>
+          <div class="arc-callout arc-callout-tr">
+            <span class="arc-callout-title">ROBOTIC ARM</span>
+            <span class="arc-callout-sub">ESP32 &amp; CAN-Bus hardware</span>
+          </div>
+
+          <img
+            src="{{asset "images/arc-robot-arm.png"}}"
+            alt="P1 Industrial Robotic Arm CAD Diagram"
+            class="arc-robot-img"
+            loading="lazy"
+          />
+
+          <div class="arc-callout arc-callout-bl">
+            <span class="arc-callout-title">CONTROLLER STACK</span>
+            <span class="arc-callout-sub">Rust, Go &amp; C++ kernels</span>
+          </div>
+          <div class="arc-callout arc-callout-br">
+            <span class="arc-callout-title">DEV STACK</span>
+            <span class="arc-callout-sub">Cloud, Linux &amp; Neovim</span>
+          </div>
         </div>
       </div>
 
-      <p class="rail-profile-bio">
-        {{#if @custom.hero_subheadline}}
-          {{@custom.hero_subheadline}}
-        {{else}}
-          Engineering dispatches on systems programming (Rust, Go, C++), autonomous AI agents &amp; MCP, Linux internals, cloud infrastructure, and embedded hardware builds.
-        {{/if}}
-      </p>
+      <div class="arc-split-grid">
+        <a
+          href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="arc-split-cell"
+        >
+          <span class="arc-cell-kicker">PRECISION ENGINEERED</span>
+          <h4 class="arc-cell-title">Cases &#8599;</h4>
+          <p class="arc-cell-desc">
+            80+ open-source repositories documented across systems, AI, and hardware.
+          </p>
+        </a>
 
-      <dl class="sysinfo-list rail-sysinfo">
-        <div class="sysinfo-row">
-          <dt>host</dt>
-          <dd>blog.vitorx86.dev</dd>
-        </div>
-        <div class="sysinfo-row">
-          <dt>stack</dt>
-          <dd>Rust &middot; Go &middot; C++ &middot; Python</dd>
-        </div>
-        <div class="sysinfo-row">
-          <dt>focus</dt>
-          <dd>Systems &middot; AI/MCP &middot; Embedded</dd>
-        </div>
-        <div class="sysinfo-row">
-          <dt>posts</dt>
-          <dd class="sysinfo-green">
-            {{#get "posts" limit="1" as |all_posts post_pages|}}
-              {{plural post_pages.total empty="0 published (standby)" singular="% published" plural="% published"}}
-            {{/get}}
-          </dd>
-        </div>
-      </dl>
-
-      <div class="rail-profile-actions">
         <a
           href="{{#if @custom.main_site_url}}{{@custom.main_site_url}}{{else}}https://vitorx86.dev{{/if}}"
           target="_blank"
           rel="noopener noreferrer"
-          class="btn-terminal rail-btn-full"
-          id="rail-cta-vitorx86"
+          class="arc-split-cell"
         >
-          <span class="dollar-muted">$</span>
-          <span>./open_vitorx86.sh ↗</span>
-        </a>
-        <a
-          href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn-terminal-secondary rail-btn-full"
-          id="rail-cta-portfolio"
-        >
-          <span class="dollar-muted">$</span>
-          <span>./browse_86_repos.sh ↗</span>
+          <span class="arc-cell-kicker">FACTORY READY</span>
+          <h4 class="arc-cell-title">Control &#8599;</h4>
+          <p class="arc-cell-desc">
+            Main vitorx86.dev workstation, architecture specs, and direct contact.
+          </p>
         </a>
       </div>
-    </div>
-  </div>
 
-  {{#if @custom.show_topic_channels}}
-    <div class="terminal-card rail-card" id="topics">
-      <div class="terminal-card-bar">
-        <div class="terminal-dots" aria-hidden="true">
-          <span class="dot-red"></span>
-          <span class="dot-yellow"></span>
-          <span class="dot-green"></span>
+      <div class="arc-spec-section" id="topics" data-show-topics="{{@custom.show_topic_channels}}">
+        <div class="arc-spec-header">
+          <span>CHANNEL</span>
+          <span>SPEC</span>
+          <span>OUTPUT</span>
         </div>
-        <span class="terminal-card-path">~/blog/channels</span>
-      </div>
-      <div class="rail-widget-body">
-        <div class="rail-widget-header">
-          <h3 class="rail-widget-title">#active_channels</h3>
-          <span class="rail-widget-subtitle">topic streams</span>
-        </div>
-        <div class="rail-channel-list">
-          <a href="{{@site.url}}/tag/systems-and-cli/" class="rail-channel-item">
-            <span class="rail-channel-tag tag-teal">#systems-and-cli</span>
-            <span class="rail-channel-desc">Rust, Go, C++, vector search &amp; Linux CLI</span>
-          </a>
-          <a href="{{@site.url}}/tag/ai-and-agents/" class="rail-channel-item">
-            <span class="rail-channel-tag tag-indigo">#ai-and-agents</span>
-            <span class="rail-channel-desc">Autonomous agents, MCP servers &amp; local LLMs</span>
-          </a>
-          <a href="{{@site.url}}/tag/hardware-and-garage/" class="rail-channel-item">
-            <span class="rail-channel-tag tag-pink">#hardware-and-garage</span>
-            <span class="rail-channel-desc">ESP32 firmware, CAN-Bus telemetry &amp; robotics</span>
-          </a>
-          <a href="{{@site.url}}/tag/cloud-and-devops/" class="rail-channel-item">
-            <span class="rail-channel-tag tag-teal">#cloud-and-devops</span>
-            <span class="rail-channel-desc">GCP, Terraform, Sway/Wayland &amp; Neovim</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  {{/if}}
 
-  <div class="terminal-card rail-card">
-    <div class="terminal-card-bar">
-      <div class="terminal-dots" aria-hidden="true">
-        <span class="dot-red"></span>
-        <span class="dot-yellow"></span>
-        <span class="dot-green"></span>
-      </div>
-      <span class="terminal-card-path">~/cases.vitorx86.dev</span>
-    </div>
-    <div class="rail-widget-body">
-      <div class="rail-widget-header">
-        <h3 class="rail-widget-title">./open_source_builds</h3>
-        <a
-          href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rail-widget-more"
-        >
-          see all ↗
-        </a>
-      </div>
-      <div class="rail-channel-list">
-        <a
-          href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rail-channel-item"
-        >
-          <span class="rail-repo-name">turbovec &amp; ruscene</span>
-          <span class="rail-channel-desc">High-performance vector &amp; full-text search in Rust</span>
-        </a>
-        <a
-          href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rail-channel-item"
-        >
-          <span class="rail-repo-name">go-ls</span>
-          <span class="rail-channel-desc">Modern Linux directory listing CLI &amp; telemetry server</span>
-        </a>
-        <a
-          href="{{#if @custom.portfolio_url}}{{@custom.portfolio_url}}{{else}}https://cases.vitorx86.dev{{/if}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rail-channel-item"
-        >
-          <span class="rail-repo-name">Alissa &amp; MCP Servers</span>
-          <span class="rail-channel-desc">Local LLM companion &amp; Model Context Protocol tools</span>
-        </a>
+        <div class="arc-spec-row">
+          <span class="arc-spec-key">DISPATCH</span>
+          <span class="arc-spec-val">
+            {{#get "posts" limit="1" as |all_posts post_pages|}}
+              {{plural post_pages.total empty="0 PUBLISHED" singular="% PUBLISHED" plural="% PUBLISHED"}}
+            {{/get}}
+          </span>
+          <span class="arc-spec-out">CONTINUOUS DUTY</span>
+        </div>
+        <div class="arc-spec-row">
+          <span class="arc-spec-key">ENGINEER</span>
+          <span class="arc-spec-val">VITOR VIEIRA</span>
+          <span class="arc-spec-out">GOOGLE SWE</span>
+        </div>
       </div>
     </div>
   </div>

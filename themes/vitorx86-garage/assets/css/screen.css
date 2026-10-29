@@ -2614,3 +2614,360 @@ html.dark .gh-content code {
 .inline-exec-link:hover {
   text-decoration: underline;
 }
+
+/* ==========================================================================
+   ARC P1 Industrial Robot Datasheet Sidebar (Right Rail)
+   ========================================================================== */
+
+.arc-datasheet {
+  display: grid;
+  grid-template-columns: 2.35rem minmax(0, 1fr);
+  background-color: #f4f4f1;
+  color: #141414;
+  border: 1px solid #18181b;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-resting);
+}
+
+.arc-orange-spine {
+  background-color: #ff4814;
+  color: #141414;
+  border-right: 1px solid #18181b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0;
+  user-select: none;
+}
+
+.arc-spine-logo {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-align: center;
+  padding: 0 0.2rem;
+}
+
+.arc-spine-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.arc-spine-arrow {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.arc-sheet-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.arc-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  background-color: #e2e3df;
+  border-bottom: 1px solid #18181b;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #18181b;
+}
+
+.arc-hero-block {
+  padding: 0.9rem 0.85rem;
+  border-bottom: 1px solid #18181b;
+}
+
+.arc-hero-title {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: #141414;
+}
+
+.arc-hero-desc {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  line-height: 1.55;
+  color: #27272a;
+}
+
+.arc-diagram-block {
+  padding: 0.85rem;
+  border-bottom: 1px solid #18181b;
+}
+
+.arc-diagram-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.arc-diagram-title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #141414;
+}
+
+.arc-diagram-kicker {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  text-align: right;
+  color: #27272a;
+}
+
+.arc-robot-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.35rem 0;
+}
+
+.arc-robot-img {
+  width: 88%;
+  max-width: 14.5rem;
+  height: auto;
+  display: block;
+  margin: 0.25rem auto;
+}
+
+.arc-callout {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  line-height: 1.25;
+}
+
+.arc-callout-tl,
+.arc-callout-bl {
+  align-self: flex-start;
+}
+
+.arc-callout-tr,
+.arc-callout-br {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.arc-callout-title {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #141414;
+}
+
+.arc-callout-sub {
+  font-size: 0.52rem;
+  color: #52525b;
+}
+
+.arc-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #18181b;
+}
+
+.arc-split-cell {
+  padding: 0.75rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: background-color 150ms ease;
+}
+
+.arc-split-cell:first-child {
+  border-right: 1px solid #18181b;
+}
+
+.arc-split-cell:hover {
+  background-color: #e8e8e3;
+}
+
+.arc-cell-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #3f3f46;
+}
+
+.arc-cell-title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #141414;
+}
+
+.arc-cell-desc {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  line-height: 1.45;
+  color: #3f3f46;
+}
+
+.arc-spec-section {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.arc-spec-header {
+  display: grid;
+  grid-template-columns: 4.1rem 1fr 5.2rem;
+  gap: 0.35rem;
+  padding: 0.35rem 0.45rem;
+  background-color: #141414;
+  color: #f4f4f1;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.arc-spec-row {
+  display: grid;
+  grid-template-columns: 4.1rem 1fr 5.2rem;
+  gap: 0.35rem;
+  align-items: center;
+  padding: 0.38rem 0.25rem;
+  border-bottom: 1px solid #18181b;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  line-height: 1.3;
+  color: #141414;
+  transition: background-color 150ms ease;
+}
+
+a.arc-spec-row:hover {
+  background-color: #e8e8e3;
+}
+
+.arc-spec-key {
+  font-weight: 600;
+  color: #3f3f46;
+}
+
+.arc-spec-val {
+  font-weight: 700;
+  color: #141414;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arc-spec-out {
+  font-weight: 600;
+  color: #27272a;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Boxy Industrial Terminal & Post Card Geometry
+   ========================================================================== */
+
+.terminal-card,
+.terminal-empty-window,
+.article-terminal-header,
+.terminal-links-panel,
+.pagination-inner,
+.arc-datasheet,
+.devto-prose-card,
+.clean-feed-card,
+.clean-article-card,
+.clean-sidebar-card,
+.clean-share-card,
+.clean-adjacent-card {
+  border-radius: 0;
+}
+
+.clean-feed-card,
+.clean-article-card,
+.clean-sidebar-card,
+.clean-share-card,
+.clean-adjacent-card {
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 2px 6px -1px rgb(0 0 0 / 0.06), 0 1px 3px -1px rgb(0 0 0 / 0.04);
+}
+
+html.dark .clean-feed-card,
+html.dark .clean-article-card,
+html.dark .clean-sidebar-card,
+html.dark .clean-share-card,
+html.dark .clean-adjacent-card {
+  border-color: #334155;
+  box-shadow: 0 2px 8px -1px rgb(0 0 0 / 0.25);
+}
+
+.clean-feed-card:hover {
+  border-color: var(--vitor-prompt-teal);
+  box-shadow: 0 6px 16px -3px rgb(0 0 0 / 0.09), 0 2px 6px -2px rgb(0 0 0 / 0.05);
+}
+
+.terminal-card,
+.terminal-empty-window,
+.article-terminal-header,
+.terminal-links-panel {
+  border: 1px solid #374151;
+  box-shadow: var(--shadow-resting);
+}
+
+.terminal-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--vitor-prompt-teal-bright);
+  box-shadow: var(--shadow-hover);
+}
+
+.rail-card:hover {
+  transform: none;
+  box-shadow: var(--shadow-resting);
+}
+
+.terminal-card-bar {
+  background-color: #18212f;
+  border-bottom: 1px solid #374151;
+  padding: 0.55rem 0.85rem;
+}
+
+.arc-datasheet {
+  box-shadow: var(--shadow-resting);
+}
